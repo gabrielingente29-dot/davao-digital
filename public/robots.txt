@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Post-conversion and error pages — no SEO value, kept out of the index.
+Disallow: /thanks.html
+Disallow: /404.html
+
+# PLACEHOLDER: swap in the real domain once DNS is live.
+Sitemap: https://davaodigital.ph/sitemap.xml

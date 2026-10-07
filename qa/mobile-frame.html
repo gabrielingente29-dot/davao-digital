@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Mobile viewport harness</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        background: #202020;
+        height: 100%;
+        overflow: hidden;
+      }
+      iframe {
+        width: 390px;
+        height: 844px;
+        border: 0;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      Forces a true 390x844 CSS viewport for QA screenshots. Headless Chrome on
+      Windows clamps its window to a minimum width (~500px), so a
+      --window-size=390 capture shows a crop of a desktop-width layout. An iframe
+      gets its own viewport, so the page really does lay out at 390px.
+      Served from dist/ so it is same-origin with the site (Chrome blocks a
+      file:// page from framing localhost).
+    -->
+    <iframe id="f" scrolling="no"></iframe>
+    <script>
+      document.getElementById("f").src = "/_qa.html";
+    </script>
+  </body>
+</html>

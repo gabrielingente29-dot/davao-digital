@@ -1,0 +1,310 @@
+<!doctype html>
+<html lang="en-PH">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#081627" id="theme-color-meta" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <!-- ===== THEME PREFERENCE (before first paint, no flash) =====
+         Resolves the visitor's theme choice once so CSS paints the right palette
+         before React boots. Defaults to the OS `prefers-color-scheme`. -->
+    <script>
+      (function () {
+        var theme;
+        try {
+          var pref = localStorage.getItem("gm:theme");
+          var systemLight =
+            window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+          if (pref === "dark" || pref === "light") {
+            theme = pref;
+          } else {
+            theme = systemLight ? "light" : "dark";
+          }
+        } catch (e) {
+          theme = "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+
+        // Keep the browser chrome chrome-bar / mobile tab colour in sync.
+        var meta = document.getElementById("theme-color-meta");
+        if (meta) {
+          meta.setAttribute("content", theme === "light" ? "#ffffff" : "#081627");
+        }
+      })();
+    </script>
+
+    <!-- ===== MOTION PREFERENCE (before first paint, no flash) =====
+         Resolves the visitor's motion choice once so CSS and the cursor layer
+         both know about it before React boots. Defaults to the OS setting. -->
+    <script>
+      (function () {
+        var reduced;
+        try {
+          var pref = localStorage.getItem("gm:motion");
+          reduced =
+            pref === "reduced" ||
+            (pref !== "full" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+        } catch (e) {
+          reduced = false;
+        }
+        document.documentElement.dataset.motion = reduced ? "reduced" : "full";
+      })();
+    </script>
+
+    <!-- ==================== PRIMARY SEO ==================== -->
+    <title>Web Design &amp; Digital Marketing in Davao City | Davao Digital</title>
+    <meta
+      name="description"
+      content="Davao Digital builds fast, modern websites for Davao City businesses — live in 7 days, from ₱15,000, with an optional ₱3,000/month Care Plan. Local SEO, Google Business Profile, hosting and Meta ads for businesses across the Philippines."
+    />
+    <meta
+      name="keywords"
+      content="web design Davao City, web designer Davao, website developer Davao City, digital marketing Davao City, SEO services Davao, local SEO Philippines, Google Business Profile Davao, Facebook ads management Davao, website design Philippines, small business website Philippines, affordable website Davao City, website maintenance Davao"
+    />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="googlebot" content="index, follow" />
+    <meta name="author" content="Davao Digital" />
+    <link rel="canonical" href="https://davaodigital.ph/" />
+
+    <!-- ==================== LOCAL / GEO SEO ==================== -->
+    <meta name="geo.region" content="PH-DAV" />
+    <meta name="geo.placename" content="Davao City, Davao del Sur, Philippines" />
+    <meta name="geo.position" content="7.1907;125.4553" />
+    <meta name="ICBM" content="7.1907, 125.4553" />
+    <meta name="language" content="English" />
+    <meta name="revisit-after" content="7 days" />
+
+    <!-- ==================== OPEN GRAPH / SOCIAL ==================== -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Davao Digital" />
+    <meta property="og:locale" content="en_PH" />
+    <meta property="og:url" content="https://davaodigital.ph/" />
+    <meta
+      property="og:title"
+      content="Web Design &amp; Digital Marketing in Davao City | Davao Digital"
+    />
+    <meta
+      property="og:description"
+      content="Websites for Davao businesses, live in 7 days. We build your site first — free. Then we host, update and care for it for ₱3,000/month."
+    />
+    <meta property="og:image" content="/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="Davao Digital — web design and digital marketing in Davao City"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Web Design &amp; Digital Marketing in Davao City | Davao Digital"
+    />
+    <meta
+      name="twitter:description"
+      content="Websites for Davao businesses, live in 7 days. Built first, free. Care Plan ₱3,000/month."
+    />
+    <meta name="twitter:image" content="/og.png" />
+    <meta name="twitter:image:alt" content="Davao Digital — web design in Davao City" />
+
+    <!-- ==================== FONTS ==================== -->
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ==================== STRUCTURED DATA ==================== -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": ["ProfessionalService", "LocalBusiness"],
+            "@id": "https://davaodigital.ph/#business",
+            "name": "Davao Digital",
+            "description": "Web design and digital marketing agency in Davao City, Philippines. Custom websites built in 7 days with monthly hosting, updates, local SEO, Google Business Profile and Meta ads management.",
+            "url": "https://davaodigital.ph/",
+            "email": "davaodigital@gmail.com",
+            "telephone": "+639691933721",
+            "priceRange": "₱₱",
+            "currenciesAccepted": "PHP",
+            "paymentAccepted": "Cash, GCash, Bank Transfer",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Davao City",
+              "addressRegion": "Davao del Sur",
+              "postalCode": "8000",
+              "addressCountry": "PH"
+            },
+            "geo": { "@type": "GeoCoordinates", "latitude": 7.1907, "longitude": 125.4553 },
+            "hasMap": "https://maps.google.com/?q=Davao+City,+Philippines",
+            "openingHoursSpecification": [
+              {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "09:00",
+                "closes": "18:00"
+              }
+            ],
+            "areaServed": [
+              { "@type": "City", "name": "Davao City" },
+              { "@type": "City", "name": "Tagum" },
+              { "@type": "City", "name": "General Santos" },
+              { "@type": "City", "name": "Cebu City" },
+              { "@type": "City", "name": "Cagayan de Oro" },
+              { "@type": "City", "name": "Metro Manila" },
+              { "@type": "AdministrativeArea", "name": "Davao Region" },
+              { "@type": "Country", "name": "Philippines" }
+            ],
+            "knowsAbout": [
+              "Web design",
+              "Web development",
+              "Local SEO",
+              "Google Business Profile",
+              "Digital marketing",
+              "Meta ads management",
+              "Website hosting and maintenance"
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Website packages",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "name": "Basic website package",
+                  "priceCurrency": "PHP",
+                  "price": "15000",
+                  "description": "1–3 pages, mobile-responsive design, contact form and basic SEO. ₱15,000–18,000, delivered in 5–7 days. Optional Care Plan ₱3,000 per month."
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Standard website package",
+                  "priceCurrency": "PHP",
+                  "price": "20000",
+                  "description": "5–6 pages, custom design tailored to your brand and a conversion-focused layout. ₱20,000–25,000, delivered in 1–2 weeks. Optional Care Plan ₱3,000 per month."
+                },
+                {
+                  "@type": "Offer",
+                  "name": "Premium website package",
+                  "priceCurrency": "PHP",
+                  "price": "30000",
+                  "description": "9–10 pages, premium design, lead- and conversion-optimized structure and advanced SEO. From ₱30,000, delivered in 2–3 weeks. Optional Care Plan ₱3,000 per month."
+                }
+              ]
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://davaodigital.ph/#website",
+            "url": "https://davaodigital.ph/",
+            "name": "Davao Digital",
+            "inLanguage": "en-PH",
+            "publisher": { "@id": "https://davaodigital.ph/#business" }
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://davaodigital.ph/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "How fast can my website be live?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Seven days from the moment we have your details. We usually have the first working version in front of you within 3–5 days, then we polish and launch. Rush jobs can go live in 48 hours for a small priority fee."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What do I need to give you?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Your logo, a few photos of your business, your services and prices, and your contact details. No logo or photos yet? We can handle that. If you only have a Facebook page, we'll pull what we can and rewrite it properly."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Who owns the website and the domain?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "You do. The domain is registered in your name and the site files are yours. If you ever leave, we hand everything over — no exit fees."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Can I cancel the monthly plan?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes, any month, with 30 days notice. There is no lock-in contract. Your site stays online if you want to manage hosting yourself, or we can transfer it to your own account."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What exactly is included in the monthly fee?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Hosting and domain management, security and software updates, automatic backups, uptime and speed monitoring, up to 2 hours of content edits a month, priority support, a monthly performance report and ongoing local SEO tuning — ₱3,000 per month, available with every package."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How much does a website cost in Davao City?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Our packages run from ₱15,000 to ₱30,000+ depending on page count and features, plus an optional ₱3,000 per month Care Plan for hosting, updates, backups and support."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Do you work with businesses outside Davao City?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Yes. We are based in Davao City and work with clients across the Philippines — Cebu, Cagayan de Oro, General Santos, Metro Manila and everywhere in between. Everything is handled online, with calls in Bisaya, Tagalog or English."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <!-- ==================== ANALYTICS (PLACEHOLDER) ====================
+         Replace GA_ID with your real GA4 Measurement ID (looks like G-XXXXXXXXXX).
+         While it still contains “XXXX” the snippet does nothing at all — no
+         network request, no console noise — so it is safe to ship as-is. -->
+    <script>
+      (function () {
+        var GA_ID = "G-XXXXXXXXXX"; // PLACEHOLDER — paste the real GA4 ID here
+        if (GA_ID.indexOf("XXXX") !== -1 || !/^G-[A-Z0-9]{8,}$/.test(GA_ID)) return;
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function () {
+          window.dataLayer.push(arguments);
+        };
+        window.gtag("js", new Date());
+        window.gtag("config", GA_ID, { anonymize_ip: true });
+      })();
+    </script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <noscript>
+      Davao Digital — web design and digital marketing in Davao City, Philippines. Websites built in
+      7 days from ₱15,000, then cared for from ₱3,000 per month with hosting, updates, local SEO and Google
+      Business Profile. Serving Davao City, Tagum, General Santos, Cebu, Cagayan de Oro, Metro Manila and
+      businesses across the Philippines. Call +63 969 193 3721 or email davaodigital@gmail.com.
+    </noscript>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

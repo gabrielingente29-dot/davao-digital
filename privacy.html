@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en-PH">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#081627" id="theme-color-meta" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <script>
+      (function () {
+        var theme;
+        try {
+          var pref = localStorage.getItem("gm:theme");
+          var systemLight =
+            window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+          theme = pref === "dark" || pref === "light" ? pref : systemLight ? "light" : "dark";
+        } catch (e) {
+          theme = "dark";
+        }
+        document.documentElement.setAttribute("data-theme", theme);
+        var meta = document.getElementById("theme-color-meta");
+        if (meta) meta.setAttribute("content", theme === "light" ? "#ffffff" : "#081627");
+      })();
+    </script>
+    <script>
+      (function () {
+        var reduced;
+        try {
+          var pref = localStorage.getItem("gm:motion");
+          reduced =
+            pref === "reduced" ||
+            (pref !== "full" && window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+        } catch (e) {
+          reduced = false;
+        }
+        document.documentElement.dataset.motion = reduced ? "reduced" : "full";
+      })();
+    </script>
+
+    <title>Privacy Policy | Davao Digital</title>
+    <meta
+      name="description"
+      content="How Davao Digital collects, uses and protects your personal information — in plain English. We only collect what we need to answer your enquiry and we never sell your details."
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Davao Digital" />
+    <link rel="canonical" href="https://davaodigital.ph/privacy.html" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Davao Digital" />
+    <meta property="og:locale" content="en_PH" />
+    <meta property="og:url" content="https://davaodigital.ph/privacy.html" />
+    <meta property="og:title" content="Privacy Policy | Davao Digital" />
+    <meta
+      property="og:description"
+      content="How Davao Digital handles your personal information, in plain English."
+    />
+    <meta property="og:image" content="/og.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="/og.png" />
+
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="root"></div>
+    <noscript>
+      Privacy policy for Davao Digital, web design and digital marketing in Davao City. We collect
+      only the information needed to answer your enquiry, we never sell your details, and you can
+      ask us to delete them at any time. Email hello@davaodigital.ph.
+    </noscript>
+    <script type="module" src="/src/entries/privacy.tsx"></script>
+  </body>
+</html>

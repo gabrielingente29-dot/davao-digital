@@ -1,0 +1,32 @@
+
+--- 1920px ---
+  neutral  collisions=0  phoneLeft=  935.36 gap-to-CTA=-308.58px (need >=23)      *** FAIL ***
+
+--- 1750px ---
+  neutral  collisions=0  phoneLeft=  850.36 gap-to-CTA=-308.58px (need >=23)      *** FAIL ***
+
+--- 1600px ---
+  neutral  collisions=0  phoneLeft=  775.36 gap-to-CTA=-308.58px (need >=23)      *** FAIL ***
+
+--- 1440px ---
+  neutral  collisions=0  phoneLeft=  695.36 gap-to-CTA=-308.58px (need >=23)      *** FAIL ***
+
+--- 1280px ---
+  neutral  collisions=0  phoneLeft=  615.36 gap-to-CTA=-308.58px (need >=23)      *** FAIL ***
+
+--- 1100px ---
+  neutral  collisions=0  phoneLeft=  523.95 gap-to-CTA=-237.17px (need >=23)      *** FAIL ***
+
+--- 1024px ---
+  neutral  collisions=2  phoneLeft=  485.19 gap-to-CTA=-198.41px (need >=23)     OVERLAP "See our work" w=12.56 *** FAIL ***
+
+--- 900px ---
+  neutral  collisions=0  phoneLeft=      90 gap-to-CTA=      n/a                  OK
+
+--- 768px ---
+  neutral  collisions=0  phoneLeft=      24 gap-to-CTA=      n/a                  OK
+
+--- 390px ---
+  neutral  collisions=0  phoneLeft=       8 gap-to-CTA=      n/a                  OK
+
+7 state(s) with collisions

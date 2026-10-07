@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Build output — Cloudflare (or any host) rebuilds this from source
+dist/
+dist-ssr/
+
+# Local QA artifacts: screenshots and the temporary harness pages.
+# The scripts in qa/ are tracked; the captured images are not.
+qa/shots/
+
+# Local logs
+*.log
+npm-debug.log*
+yarn-error.log*
+bun-error.log*
+
+# Environment
+.env
+.env.*
+!.env.example
+*.local
+
+# Editors / OS
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
