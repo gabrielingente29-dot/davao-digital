@@ -9,17 +9,33 @@ export const brand = {
   email: "davaodigital@gmail.com",
   phone: "+63 969 193 3721",
   phoneHref: "+639691933721",
-  messenger: "https://m.me/davaodigital",
-  viber: "viber://chat?number=%2B639170000000",
+  /** Messenger short link for the page ID above. */
+  messenger: "https://m.me/61595369930225",
+  viber: "viber://chat?number=%2B639691933721",
   facebook: "https://www.facebook.com/profile.php?id=61595369930225",
-  instagram: "https://instagram.com/davaodigital",
-  linkedin: "https://linkedin.com/company/davaodigital",
-  directionsUrl:
-    "https://www.google.com/maps/dir/?api=1&destination=Davao+City,+Philippines",
-  mapsEmbedUrl:
-    "https://www.google.com/maps?q=Davao+City,+Philippines&z=12&output=embed",
+  /**
+   * The studio is ONLINE-ONLY: there is no walk-in address and no Google
+   * Business Profile yet, so nothing on the site may claim one. If an address
+   * or a GBP link ever exists, add it here — see MISSING-INFO.md §2.
+   */
+  location: "Davao City, Philippines · working with clients online",
+  meetingNote:
+    "Usually online — calls, Messenger or Viber. We're happy to meet in person in Davao City when it helps.",
   hours: "Mon–Sat · 9AM–6PM (PHT)",
 } as const;
+
+/**
+ * The terms we actually trade on. Kept together so the FAQ, the pricing cards
+ * and the schema can never drift apart.
+ */
+export const policies = {
+  /** 48-hour priority delivery, on top of the standard package price. */
+  rushFee: 5000,
+  /** Not VAT-registered, so no VAT is added to any price. */
+  vatRegistered: false,
+  /** Cancellation term for the monthly Care Plan. */
+  cancellation: "Cancel any month with 30 days' notice — there is no lock-in contract.",
+};
 
 export const promise = {
   responseTime: "We reply within 1 business day",
@@ -100,8 +116,8 @@ export const processSteps = [
   {
     step: "02",
     title: "You review it and tell us what to change",
-    body: "You get a private link. We adjust the words, photos, colours and pages until it feels exactly like your business.",
-    detail: "Unlimited revisions before launch",
+    body: "You get a private link. We adjust the words, photos and colours until it feels exactly like your business.",
+    detail: "Two rounds of changes until it looks right",
     screen: "review",
   },
   {
@@ -210,7 +226,7 @@ export const pricing = {
         "Basic SEO setup",
         "Fast loading speed",
         "1 revision round",
-        "Delivery: 5–7 days",
+        "Live in 7 days",
       ],
       adds: [],
       cta: "Start with Basic",
@@ -231,7 +247,7 @@ export const pricing = {
         "Basic SEO setup",
         "Fast loading and performance optimization",
         "2 revision rounds",
-        "Delivery: 1–2 weeks",
+        "Live in 7 days",
       ],
       adds: [],
       popular: true,
@@ -252,7 +268,7 @@ export const pricing = {
         "Advanced SEO setup",
         "Performance and speed optimization",
         "3 revision rounds",
-        "Delivery: 2–3 weeks",
+        "Live in 7 days",
       ],
       adds: [],
       cta: "Talk about Premium",
@@ -281,7 +297,7 @@ export const caseStudies: CaseStudy[] = [
   {
     client: "[CLIENT 1]",
     industry: "Dental clinic",
-    location: "Bajada, Davao City",
+    location: "Davao City",
     headline: "+38 online enquiries in the first month",
     summary:
       "We replaced an outdated Facebook-only presence with a clean booking site, then optimised their Google Business Profile for “dentist Davao”.",
@@ -301,7 +317,7 @@ export const caseStudies: CaseStudy[] = [
   {
     client: "[CLIENT 2]",
     industry: "Machine shop & fabrication",
-    location: "Bunawan, Davao City",
+    location: "Davao City",
     headline: "3× more quote requests from Mindanao clients",
     summary:
       "A gallery-first site that shows the work, plus service pages for the jobs that pay best. Quote forms route straight to their shop phone.",
@@ -320,61 +336,76 @@ export const caseStudies: CaseStudy[] = [
   },
 ];
 
+/**
+ * 🔴 PLACEHOLDER REVIEWS — NOT REAL YET.
+ *
+ * Every quote below is layout filler written by us. They are attributed to
+ * bracketed placeholders on purpose, and the testimonials section reads
+ * `testimonialsArePlaceholders` so the page says so out loud instead of
+ * implying these are paying customers.
+ *
+ * To finish this properly: collect 6–8 real reviews (quote, first name,
+ * business name, area, and written permission to publish), delete the brackets
+ * from `name` and `meta`, then set `testimonialsArePlaceholders = false`.
+ * Tracked in MISSING-INFO.md §5.
+ */
+export const testimonialsArePlaceholders = true;
+
 export const testimonials = [
   {
     quote:
       "They sent us a finished website before we paid a single peso. We just said yes and it was live the following week.",
-    name: "Cafe owner",
-    meta: "Torres St., Davao City",
+    name: "[Client name — cafe owner]",
+    meta: "[Business] · Davao City",
   },
   {
     quote:
       "Our Google profile finally works. We get calls from people searching for us in Davao and as far as General Santos.",
-    name: "Hardware supplier",
-    meta: "Bunawan, Davao City",
+    name: "[Client name — hardware supplier]",
+    meta: "[Business] · Davao City",
   },
   {
     quote:
       "The monthly report is the first marketing report I actually read. Short, clear, and it always comes with a next step.",
-    name: "Real estate broker",
-    meta: "Lanang, Davao City",
+    name: "[Client name — real estate broker]",
+    meta: "[Business] · Davao City",
   },
   {
     quote:
       "Bookings went up without us spending more on ads. The website just does the work now.",
-    name: "Salon owner",
-    meta: "Matina, Davao City",
+    name: "[Client name — salon owner]",
+    meta: "[Business] · Davao City",
   },
   {
     quote:
       "They replied the same day, every time. Updates are done before I even remember to ask.",
-    name: "Logistics company",
-    meta: "Tagum City",
+    name: "[Client name — logistics company]",
+    meta: "[Business] · Tagum",
   },
   {
     quote:
       "We're in Cebu and Davao. One site, two location pages, and both rank. That solved a real headache for us.",
-    name: "Bakery & café group",
-    meta: "Cebu & Davao",
+    name: "[Client name — bakery & café group]",
+    meta: "[Business] · Cebu City",
   },
   {
     quote:
       "Our clinic looks like a chain now. Same staff, same building, completely different first impression.",
-    name: "Dental clinic owner",
-    meta: "Bajada, Davao City",
+    name: "[Client name — dental clinic owner]",
+    meta: "[Business] · Davao City",
   },
   {
     quote:
       "Facebook ads used to burn money. Now they point at a proper page and the numbers make sense.",
-    name: "Auto shop owner",
-    meta: "Talomo, Davao City",
+    name: "[Client name — auto shop owner]",
+    meta: "[Business] · Cagayan de Oro",
   },
 ];
 
 export const faqs = [
   {
     q: "How fast can my website be live?",
-    a: "Seven days from the moment we have your details. We usually have the first working version in front of you within 3–5 days, then we polish and launch. Rush jobs can go live in 48 hours for a small priority fee.",
+    a: "Seven days from the moment we have your details — the same promise on every package. We usually have the first working version in front of you within 3–5 days, then we polish and launch. Need it sooner? A 48-hour rush is ₱5,000.",
   },
   {
     q: "What do I need to give you?",
@@ -394,17 +425,17 @@ export const faqs = [
   },
   {
     q: "How much does a website cost in Davao City?",
-    a: "Our packages run from ₱15,000 to ₱30,000+ depending on page count and features, plus an optional ₱3,000 per month Care Plan for hosting, updates, backups and support. That's deliberately in line with what local businesses can carry — no agency retainers.",
+    a: "Our packages run from ₱15,000 to ₱30,000+ depending on page count and features, plus an optional ₱3,000 per month Care Plan for hosting, updates, backups and support. We are not VAT-registered, so no VAT is added. That's deliberately in line with what local businesses can carry — no agency retainers.",
   },
   {
     q: "Do you work with businesses outside Davao City?",
-    a: "Yes. We're based in Davao City and work with clients across the Philippines — Cebu, Cagayan de Oro, General Santos, Metro Manila and everywhere in between. Everything is handled online, with calls in Bisaya, Tagalog or English.",
+    a: "Yes. We're based in Davao City and work with clients across the Philippines — Tagum, General Santos, Cebu, Cagayan de Oro, Metro Manila and everywhere in between. Everything runs online, with calls in Bisaya, Tagalog or English. We're happy to meet in person in Davao City when it helps.",
   },
 ];
 
 export const footer = {
   blurb:
-    "A small Davao City studio building fast, honest websites for local businesses — and managing them every month so they keep working.",
+    "A Davao City studio building fast, honest websites for businesses across the Philippines — then keeping them fast, secure and updated for a flat monthly fee. We work online, reply within a business day, and never lock you in.",
   columns: [
     {
       title: "Services",
@@ -426,14 +457,18 @@ export const footer = {
         { label: "Get a free preview", href: "#get-started" },
       ],
     },
+    {
+      title: "Legal",
+      links: [
+        { label: "Privacy policy", href: "/privacy.html" },
+        { label: "Terms of service", href: "/terms.html" },
+        { label: "Cookie notice", href: "/privacy.html" },
+      ],
+    },
   ],
+  /** Confirmed service areas — kept to cities, not neighbourhoods. */
   areas: [
     "Davao City",
-    "Bajada",
-    "Lanang",
-    "Matina",
-    "Torres",
-    "Bunawan",
     "Tagum",
     "General Santos",
     "Cebu City",

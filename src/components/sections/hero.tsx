@@ -31,12 +31,15 @@ const trustIcons = {
   shield: ShieldCheck,
 } as const;
 
-/** Placeholder faces for the trust row — swap for real clients when you have them. */
+/**
+ * Placeholder business types for the trust row. Keep the industries, swap the
+ * areas and names for real clients (with permission) when they exist.
+ */
 const faces: TooltipPerson[] = [
-  { id: 1, name: "Dental clinic", role: "Bajada, Davao City", gradient: "bg-teal-brand", initials: "DC" },
-  { id: 2, name: "Machine shop", role: "Bunawan, Davao City", gradient: "bg-ocean-brand", initials: "MS" },
-  { id: 3, name: "Cafe", role: "Torres St., Davao City", gradient: "bg-leaf-brand", initials: "CF" },
-  { id: 4, name: "Real estate", role: "Lanang, Davao City", gradient: "bg-ocean-soft", initials: "RE" },
+  { id: 1, name: "Dental clinic", role: "Davao City", gradient: "bg-teal-brand", initials: "DC" },
+  { id: 2, name: "Machine shop", role: "Davao City", gradient: "bg-ocean-brand", initials: "MS" },
+  { id: 3, name: "Cafe", role: "Davao City", gradient: "bg-leaf-brand", initials: "CF" },
+  { id: 4, name: "Real estate", role: "Davao City", gradient: "bg-ocean-soft", initials: "RE" },
 ];
 
 export function Hero() {

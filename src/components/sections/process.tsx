@@ -28,7 +28,7 @@ function StepScreen({ screen }: { screen: (typeof processSteps)[number]["screen"
         )}
       >
         <BrowserMockup
-          url={screen === "draft" ? "preview.davaodigital.ph" : "davaosmiledental.ph"}
+          url={screen === "draft" ? "preview.davaodigital.com" : "davaosmiledental.ph"}
           className={cn(
             "transition-shadow duration-700",
             screen === "live" && "!shadow-[0_50px_140px_-50px_rgba(30,111,217,0.85)]",

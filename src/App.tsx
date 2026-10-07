@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { CookieNotice } from "@/components/fx/cookie-notice";
 import { CustomCursor } from "@/components/fx/custom-cursor";
 import { ScrollProgress } from "@/components/fx/scroll-progress";
 import { StickyMobileCta } from "@/components/fx/sticky-mobile-cta";
@@ -56,6 +57,7 @@ export function App() {
 
       {/* Phone-only action bar — keeps the primary CTA reachable while scrolling. */}
       <StickyMobileCta />
+      <CookieNotice />
     </SmoothScrollProvider>
   );
 }

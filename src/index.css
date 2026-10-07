@@ -86,6 +86,10 @@
     --accent-to: #17bebb;
     --accent-warm: #4caf50;
 
+    /* Logo mark — the lens must not vanish into a white surface in light mode. */
+    --logo-lens: #ffffff;
+    --logo-ring: #9ba4b5;
+
     /* semantic palette — dark (deep navy canvas from the logo) */
     --surface-1: #081627;
     --surface-2: #0b1f36;
@@ -149,6 +153,11 @@
   /* ---- light ---- */
   [data-theme="light"] {
     color-scheme: light;
+
+    /* The nav pill is white in light mode, so the lens needs its own tint and
+       the ring needs a darker slate to keep the mark legible. */
+    --logo-lens: #e8eef7;
+    --logo-ring: #6b7688;
 
     /* semantic palette — light */
     --surface-1: #ffffff;

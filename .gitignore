@@ -23,6 +23,12 @@ bun-error.log*
 !.env.example
 *.local
 
+# Wrangler local state and secrets — never commit these
+.wrangler/
+.dev.vars
+.dev.vars.*
+!.dev.vars.example
+
 # Editors / OS
 .vscode/*
 !.vscode/extensions.json

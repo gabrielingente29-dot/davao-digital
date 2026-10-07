@@ -1,241 +1,165 @@
-# Davao Digital — everything still missing or faked
+# Davao Digital — what is still missing or faked
 
-Last updated after the header/logo/pricing pass. This is the complete list: every
-item below is either a **placeholder**, an **unverified claim**, or a **question
-only you can answer**. Answer them and I can drop the real values straight in.
+Updated after the big content-capture pass. Everything you answered is now in the
+code; this file lists only what is **still** a placeholder, a claim we cannot
+evidence, or a decision only you can make.
 
-**Legend** — 🔴 blocks launch · 🟡 before you start advertising · 🟢 nice to have
+**Legend** — 🔴 blocks launch · 🟡 before you advertise · 🟢 nice to have
 
 ---
 
-## 0. Placeholder inventory (every fake value on the site right now)
+## 1. Done in this pass (so you know it landed)
 
-Exact locations, so nothing gets missed.
+| You said | What changed |
+|---|---|
+| Viber `+63 969 193 3721` | Real Viber deep link, everywhere |
+| Messenger page ID | `m.me/61595369930225` |
+| Remove Instagram + LinkedIn | Both gone — no dead social links left |
+| Hours Mon–Sat 9–6 PHT | Confirmed and unchanged |
+| Rush fee ₱5,000 | In the FAQ **and** the JSON-LD schema |
+| Online only, no address | Footer, contact panel, schema and meta all reworded. **The map iframe and "Get directions" were removed** — there is nothing to point at |
+| Service areas confirmed | Cities only: Davao City, Tagum, General Santos, Cebu City, Cagayan de Oro, Metro Manila (+ nationwide). Bajada/Lanang/Matina/Torres/Bunawan removed |
+| Not VAT-registered | Stated in the FAQ, the schema and the terms |
+| Domain `davaodigital.com` | Swapped in **every** file: canonical, OG, JSON-LD, sitemap, robots, sub-pages |
+| Cookie notice | A real, dismissible notice that remembers the choice |
+| Terms of service page | `/terms.html` built and linked in the footer |
+| Footer blurb | Rewritten |
+| Revisions: 1/2/3 rounds | Process section now says "Two rounds of changes until it looks right" |
+| Care Plan strongly recommended | Wording kept as-is |
+| Form backend | `/api/enquiry` endpoint built — see §4 |
+| Light-mode logo | The white lens no longer vanishes; it now has its own light-mode colour |
+| SEO keywords | Your primary + 5 secondary keywords are in the meta keywords, title and copy |
+
+### One thing I had to decide for you — please confirm
+
+**Delivery time.** In §6 you said "our guarantee is that a website will be fully
+done in 7 days regardless of the tier", but in §7 you picked the option that
+scopes 7 days to Basic only. Those cannot both be true, so I went with your own
+words: **"7 days" now applies to every package**, and the per-package lines
+(`Delivery: 1–2 weeks`, `2–3 weeks`) are gone. It also matches the case-study
+section, which already said "same seven-day timeline".
+
+If you actually want it scoped to Basic, say so — it is a one-line change in
+`src/data/site.ts` (the three `"Live in 7 days"` entries) plus the same three
+strings in `index.html`.
+
+---
+
+## 2. Placeholder inventory (every fake value still on the site)
 
 | # | Where | What is there now | What it needs |
 |---|---|---|---|
-| 1 | `src/data/site.ts` → `brand.viber` | `viber://chat?number=%2B639170000000` — the old demo number | 🔴 your real Viber number, or delete the link |
-| 2 | `brand.messenger` | `https://m.me/davaodigital` | 🟡 your Facebook page uses a numeric ID, so this short link probably will not resolve. Send the exact link from the page's "Send message" button |
-| 3 | `brand.instagram` | `https://instagram.com/davaodigital` | 🟡 real account, or remove the link |
-| 4 | `brand.linkedin` | `https://linkedin.com/company/davaodigital` | 🟡 real page, or remove the link |
-| 5 | `brand.directionsUrl` + `brand.mapsEmbedUrl` | generic "Davao City, Philippines" | 🔴 the map in the footer points at a whole city, not an office |
-| 6 | `brand.hours` | `Mon–Sat · 9AM–6PM (PHT)` | 🟡 confirm, or correct |
-| 7 | `caseStudies[].client` | literally `[CLIENT 1]` and `[CLIENT 2]` on the page | 🔴 real names, or "a Bajada dental clinic" if they are anonymous |
-| 8 | `caseStudies[].before/after.src` | `null` → falls back to **illustrated mockups** | 🔴 real before/after screenshots |
-| 9 | `caseStudies[].stats` | `38`, `1.4s`, `72%`, `3×`, `+41%`, `12` | 🔴 real numbers, or remove them |
-| 10 | `caseStudies[].quote` / `quoteBy` | invented quotes | 🔴 real client quotes + permission to publish |
-| 11 | `testimonials` (8 entries) | invented — "Cafe owner", "Hardware supplier", … | 🔴 real reviews with name, business, area and permission |
-| 12 | `hero.trust` | `10+` Davao businesses served | 🟡 confirm 10 is true — a prospect may check |
-| 13 | testimonials stat strip | `10+`, `7 days`, `1.4s`, `98/100` | 🟡 the load time and mobile score should be re-measured after launch |
-| 14 | `faqs` → rush answer | "48 hours for a small priority fee" — **no amount** | 🟡 how much is the rush fee? |
-| 15 | `index.html` JSON-LD `geo` | `7.1907, 125.4553` — central Davao | 🔴 your actual coordinates |
-| 16 | `index.html` JSON-LD `address` | city + region only, no street | 🔴 street address (or confirm you are online-only) |
-| 17 | `index.html` JSON-LD | no `sameAs` social profiles | 🟡 now that the Facebook page is real, it should be listed |
-| 18 | `index.html` | `var GA_ID = "G-XXXXXXXXXX"` — the snippet is installed but **dormant** | 🟡 your GA4 Measurement ID |
-| 19 | `index.html` canonical / OG / JSON-LD `@id` | all assume `https://davaodigital.ph` | 🔴 confirm the domain, then swap if different |
-| 20 | `public/robots.txt`, `public/sitemap.xml` | same assumed domain, `lastmod 2026-10-05` | 🔴 same |
-| 21 | `public/og.png`, `public/favicon.svg` | generated from your logo by me | 🟢 a designed share image would look sharper |
-| 22 | `src/components/sections/final-cta.tsx` (line ~122) | form placeholder text: `facebook.com/yourpage or 0917 000 0000` | 🟢 replace the example number with a real-looking one |
-| 23 | `final-cta.tsx` form | **no backend** — it opens the visitor's mail app | 🔴 see §10 |
-| 24 | `src/components/art/mock-pages.tsx`, `process.tsx` | the fake browser screenshots contain `davaodigital.ph` and `0917 000 0000` | 🟢 cosmetic, inside decorative mockups — only worth changing once the real content lands |
+| 1 | `src/data/site.ts` → `testimonials` | 8 invented reviews. Attributions are visibly bracketed (`[Client name — cafe owner]`) and the section says "Placeholder quotes…" | 🔴 6–8 real reviews: quote, first name, business, area, written permission. Then delete the brackets and flip `testimonialsArePlaceholders` to `false` |
+| 2 | `src/data/site.ts` → `caseStudies[].client` | literally `[CLIENT 1]` and `[CLIENT 2]` | 🔴 real client names, or "a dental clinic in Davao City" if they want to stay anonymous |
+| 3 | `caseStudies[].stats` | `38`, `1.4s`, `72%`, `3×`, `+41%`, `12` | 🔴 real numbers, or delete the row |
+| 4 | `caseStudies[].quote` / `quoteBy` | invented quotes | 🔴 real quotes + permission to publish |
+| 5 | `caseStudies[].before/after.src` | `null` → the page falls back to illustrated mockups with a dashed "drop your screenshot here" box | 🔴 real before/after screenshots (`/public/case-1-before.jpg`, `case-1-after.jpg`, `case-2-before.jpg`, `case-2-after.jpg`) |
+| 6 | `hero.trust` + the stats strip | `10+` businesses served, `1.4s` load, `98/100` mobile | 🟡 you confirmed 10+; re-measure the load time and mobile score after launch and update them |
+| 7 | `src/components/art/mock-pages.tsx` | the decorative browser/phone screenshots | 🟢 see §3 — the real content list |
+| 8 | `public/og.png`, `public/favicon.svg` | generated from the logo mark | 🟢 you said the OG image is fine. Send the hi-res logo and I will re-render both |
+| 9 | `index.html` → `var GA_ID` | `G-XXXXXXXXXX` — the snippet is installed but **dormant** | 🟡 your GA4 Measurement ID |
+| 10 | `src/pages/privacy.tsx` + `src/pages/terms.tsx` | both carry a "PLACEHOLDER: have a lawyer review" note | 🔴 get both read before you rely on them |
 
 ---
 
-## 1. Contact & identity
+## 3. The mockup content list (you asked "tell me what's needed, then drop it in")
 
-| Item | Status |
+The browser and phone "screenshots" on the page are **not images** — they are
+real DOM and CSS drawn in `src/components/art/mock-pages.tsx`. That is why they
+stay razor sharp on retina screens and cost nothing to load. It also means
+swapping the content is a text edit, not a design job.
+
+There are three fictional showcase businesses. **This is the content I need from
+you** — one row per thing you can change:
+
+| Mockup | Where it appears | Hard-coded sample | Real content needed |
+|---|---|---|---|
+| **Davao Smile Dental** (`davaosmiledental.ph`) | Hero main window, process section, case study 1 | Business name, "Bajada · Davao City", headline "Gentle dental care in Davao City.", intro paragraph, 3 price cards (₱1,200 / Free / ₱4,500), "1,200+ patients treated", "4.9 on Google", phone `0917 000 0000`, "Book in two taps" | A real dental client — or any real client — with permission: name, area, one-line promise, 3 services with prices, one trust number, phone number |
+| **Kapé Dabaw** | Hero phone screen, case study 2 | Cafe name, "single-origin Bukidnon beans… Bolton Street", 3 menu prices (₱140/₱175/₱195), "4.9 ★ · 612 reviews" | A real café client's name, area, specialities and 3 prices |
+| **Mindanao Metal Works** (`mindanaometalworks.ph`) | Hero back window | Business name, "Bunawan · since 2006", stats "18 yrs / 240+ projects / ±0.05mm tolerance", 4 capability tiles | A real fabrication/machining client, with their real numbers |
+| Browser URL bars | Hero + process | `davaosmiledental.ph`, `mindanaometalworks.ph`, `preview.davaodigital.com` | Real client domains if you have them. `preview.davaodigital.com` is already correct |
+
+**If you have no real clients yet, the honest option is to label them.** Add a
+small "Sample project" chip to each mockup so nobody mistakes a fictional café
+for a case study. That is a five-minute change whenever you want it — say the
+word.
+
+A real phone number you *can* use today is your own: `+63 969 193 3721` replaces
+`0917 000 0000` in the dental mockup if you would rather the sample not look like
+a template.
+
+---
+
+## 4. The form backend (built — needs your keys)
+
+`/api/enquiry` now does four things: emails the lead to you, logs it to a Google
+Sheet, sends the visitor a confirmation, and silently drops bot spam via a
+honeypot field. **You also now have an email field on the form** — it was not
+there before, and a confirmation email is impossible without it.
+
+Two things still need you:
+
+- 🔴 **Resend API key** (`RESEND_API_KEY`) — the endpoint returns `503` without it
+  and the browser falls back to `mailto:`. Step-by-step in DEPLOYMENT.md §2.1.
+- 🟡 **`davaodigital.com` verified in Resend** — until then, visitor confirmation
+  emails are switched off on purpose, because Resend's free test sender can only
+  deliver mail to you, not to strangers. Lead notifications to you work today.
+- 🟡 **Google Sheet webhook** (`SHEET_WEBHOOK_URL`) — optional; instructions in
+  DEPLOYMENT.md §2.2.
+
+---
+
+## 5. Legal & identity
+
+| Item | State |
 |---|---|
-| Business name `Davao Digital` | ✅ assume correct |
-| Email `davaodigital@gmail.com` | ✅ in place — see the note in §12 about moving to a domain address |
-| Phone `+63 969 193 3721` | ✅ in place, including the schema |
-| Facebook page | ✅ `https://www.facebook.com/profile.php?id=61595369930225` |
-| Viber, Messenger, Instagram, LinkedIn | 🔴 / 🟡 items 1–4 above |
-| Opening hours | 🟡 item 6 |
-| Registered business name / DTI or SEC number | 🟢 not shown anywhere — do you want it in the footer? |
-| VAT / TIN | 🟡 not shown anywhere (see §3) |
+| Business name `Davao Digital` | ✅ in place. No DTI/SEC registration shown, which is fine |
+| VAT / TIN | ✅ not VAT-registered, and the site now says so |
+| Privacy policy | 🟡 written, but a lawyer should read it |
+| Terms of service | 🟡 new page — same caveat |
+| Refund / cancellation policy | ✅ "cancel any month, 30 days notice" confirmed and now written into the terms |
+| DPO name + email | 🔴 **not appointed.** The Data Privacy Act expects one once you process personal data — which the form now does, into a Sheet |
+| NPC registration | 🟡 you were not sure. Check at <https://privacy.gov.ph> whether your processing needs registering |
+| Cookie notice | ✅ built |
+| Domain email | ✅ staying on `davaodigital@gmail.com`. `hello@davaodigital.com` will exist for *sending* once Resend verifies the domain — reception still lands in Gmail |
+| Old URLs needing redirects | ✅ none |
 
 ---
 
-## 2. Location 🔴
+## 6. SEO
 
-The whole site sells "local Davao", so this is the weakest part right now.
-
-- 🔴 **Street address** — needed for the footer, the map, and local ranking.
-- 🔴 **Google Business Profile link** — the share/place link from your listing.
-- 🔴 **Google Maps embed URL** — Maps → Share → Embed a map → copy the `src`.
-- 🔴 **Exact coordinates** — replace `7.1907, 125.4553`.
-- 🟡 **Service areas** — I guessed: Davao City, Bajada, Lanang, Matina, Torres,
-  Bunawan, Tagum, General Santos, Cebu City, Cagayan de Oro, Metro Manila. Confirm.
-- 🟡 **Do you meet clients, or is everything online?** — changes the wording from
-  "visit our office" to "serving clients online".
-
----
-
-## 3. Pricing
-
-✅ The three packages you sent are live on the page, in the JSON-LD schema, in the
-FAQ answers and in the meta descriptions: **Basic ₱15,000–18,000**,
-**Standard ₱20,000–25,000** (Most Popular), **Premium ₱30,000+**, with the
-**Care Plan at ₱3,000/month** as a full-width banner under the cards.
-
-Still open:
-
-- 🟡 **Do prices include VAT?** Not stated anywhere. If you are VAT-registered this
-  must be said before you invoice.
-- 🟡 **Extra page price** — the old add-on list said ₱1,500/page and has been
-  removed. Do you want per-page pricing shown again?
-- 🟡 **Rush fee amount** (item 14).
-- 🟢 **Payment terms** — the schema says "Cash, GCash, Bank Transfer". Is a deposit
-  ever required? Right now the site promises "No payment until you approve".
+- 🟡 Primary target confirmed: **"web design Davao City"** (title, H1, description, schema).
+- ✅ Secondary keywords in place: website designer Davao, web developer Davao,
+  website development Davao City, business website Philippines, affordable web
+  design Davao.
+- 🟡 **Google Business Profile — not created.** This is the single biggest lever
+  left for local search, and you can register as a service-area business without
+  publishing a street address. Do this after the domain is live.
+- 🟡 Google Search Console: verify and submit `sitemap.xml` once the domain resolves.
+- 🟢 A blog/articles section would give Google more to rank. There is no CMS yet.
 
 ---
 
-## 4. Two promises that contradict each other 🔴
+## 7. Images
 
-Both of these are visible to a careful reader and will cost you trust.
-
-1. **Delivery time.** The hero and process section both say **"online in 7 days"**,
-   but the packages you gave me say 5–7 days (Basic), **1–2 weeks** (Standard) and
-   **2–3 weeks** (Premium). Someone buying Standard is told 7 days, then shown
-   1–2 weeks. Pick one of:
-   - keep "7 days" and scope it to Basic only, or
-   - soften the hero to something like "live in as little as 5 days".
-
-2. **Revisions.** The packages list 1 / 2 / 3 revision rounds, but the process
-   section still promises **"Unlimited revisions before launch."** Which is true?
-
----
-
-## 5. Proof — reviews and case studies 🔴
-
-**This is the biggest gap on the site.** Both case studies and all eight
-testimonials are invented. Publishing fake reviews is risky (the Philippine
-Consumer Act and Google's own review policies) and the numbers are exactly the
-kind of thing a prospect checks.
-
-Needed:
-
-- 🔴 **6–8 real reviews** — quote, first name, business name, area, and permission.
-- 🔴 **A Google review link** so a "leave us a review" button can work.
-- 🔴 **2–3 real case studies** — client name, industry, location, before
-  screenshot, after screenshot, 3 real numbers, and a quote.
-- 🟡 **Client logos** (with written permission).
-- 🟡 **Real portfolio screenshots** — today's are hand-drawn SVG mockups.
-
-If the numbers are not real yet, the honest move is to delete them. A short page
-with true claims converts better than a long one with invented ones.
-
----
-
-## 6. Images & media
-
-| Item | Status |
+| Item | State |
 |---|---|
-| Logo mark in the header | ✅ redrawn inline as SVG to match your artwork — it cannot break |
-| Higher-resolution original | 🟡 if you have the `.ai` / `.eps` / `.svg`, send it and I will swap it in |
-| Light-background logo variant | 🟡 the white lens fades into a white pill in light mode |
-| Team photos | 🟢 none — you currently come across as a studio, not named people |
-| Real portfolio screenshots | 🔴 see §5 |
-| Designed OG share image | 🟢 `og.png` is generated from the logo |
-
----
-
-## 7. Legal 🟡
-
-- 🟡 **Privacy policy review** — `privacy.html` is a careful skeleton, but a
-  lawyer should read it before launch.
-- 🔴 **DPO name + email** — the Data Privacy Act expects a designated Data
-  Protection Officer once you process personal data (which the form does).
-- 🟡 **NPC registration** — are you registered with the National Privacy Commission?
-- 🟡 **Terms of service** — do you want a separate page?
-- 🟡 **Refund / cancellation policy** — the site says "cancel any month, 30 days
-  notice". Confirm that is the real policy.
-- 🟡 **Cookie notice** — required the moment GA4 goes live.
-
----
-
-## 8. Analytics & tracking 🟡
-
-| Item | Status |
-|---|---|
-| GA4 Measurement ID | 🟡 snippet present on every page, blank ID — dormant until you paste it |
-| Google Search Console | 🟡 needs your access to verify and submit the sitemap |
-| Meta Pixel / Google Ads tag | 🟢 not installed — only needed if you run ads |
-| Call tracking | 🟢 not needed at this size |
-
----
-
-## 9. SEO 🟡
-
-- 🟡 Confirm the primary keyword target: "web design Davao City"?
-- 🟡 3–5 secondary keywords you actually want to rank for.
-- 🟡 Any old URLs that need redirects? (Send the list.)
-- 🟡 Is your Google Business Profile verified?
-- 🟢 Do you want a blog / articles section? There is no CMS yet.
-- 🟡 `lastmod` in `sitemap.xml` should be refreshed at launch.
-
----
-
-## 10. Forms & lead handling 🔴
-
-The enquiry form has **no backend**. It opens the visitor's own mail app, which
-means:
-
-- anyone without a mail client configured loses the lead silently,
-- you get no record of what was submitted,
-- nothing lands in a spreadsheet or CRM automatically.
-
-Decisions needed:
-
-- 🔴 Which inbox should enquiries go to?
-- 🔴 Do you want a real form backend? (Recommended — I have left this ready to
-  wire: Cloudflare Pages Functions since you are already on Cloudflare, or
-  Web3Forms/Formspree for a 5-minute setup.)
-- 🟡 Should the visitor get an automatic confirmation email?
-- 🟡 Should leads also land in a Google Sheet, CRM or Slack?
-- 🟡 Should "Send my details" push the visitor to `/thanks.html`? It should, so
-  conversions are trackable.
-
----
-
-## 11. Build & deploy
-
-✅ See **[DEPLOYMENT.md](DEPLOYMENT.md)** for the step-by-step GitHub + Cloudflare
-Pages walkthrough. Open questions:
-
-- 🟡 Where will it be hosted? (Cloudflare Pages is free and already fits this
-  project exactly.)
-- 🟡 Do you own `davaodigital.ph`, and do you have DNS access?
-- 🟡 Do you need email on the domain (`hello@davaodigital.ph`) as well?
-- 🟢 Is there an existing site that must stay live until launch?
-
----
-
-## 12. Copy I wrote — confirm or replace 🟡
-
-| Item | Current |
-|---|---|
-| Hero headline | "Your business, online in 7 days." |
-| Sub-headline | "We build your website first — free…" |
-| Trust numbers | `10+` businesses, live in `7 days`, `1.4s` load, `98/100` mobile |
-| Guarantees | "No payment until you approve your site", "No lock-in", "You own your domain" |
-| Response promise | "We reply within 1 business day" |
-| All 7 FAQ answers | written by me — check the claims about ownership, cancellation and scope |
-| Footer blurb | "A small Davao City studio building fast, honest websites…" |
-| Contact email | `davaodigital@gmail.com` — a gmail address is fine to start, but
-  `hello@davaodigital.ph` reads more established and lands in spam less often |
+| Logo mark | ✅ inline SVG — cannot break, cannot 404 |
+| Light-mode variant | ✅ fixed; the lens has its own light colour |
+| Hi-res original | 🟢 send the `.ai`/`.eps`/`.svg` and I will swap it in |
+| Team photos | ✅ none, and named staff were removed from the mockups so nothing implies a bigger team than you have |
+| Real portfolio screenshots | 🔴 see §2, item 5 |
+| OG share image | ✅ you said it is fine |
 
 ---
 
 ## Launch blockers, in order
 
-1. 🔴 **A real form backend** — you are losing leads today.
-2. 🔴 **Address + Google Business Profile + map** — the entire local pitch rests on it.
-3. 🔴 **Real reviews and case studies** — replace or delete the invented ones.
-4. 🔴 **Fix the 7-day vs 1–3 week delivery contradiction** and the revision-round conflict.
-5. 🔴 **Viber / Messenger / Instagram / LinkedIn** — real links or removed.
-6. 🔴 **Privacy policy review + DPO details.**
-7. 🟡 **GA4 ID + cookie notice.**
-8. 🟡 **Confirm prices include or exclude VAT.**
-9. 🟡 **Domain + DNS**, then swap the placeholder domain in 3 files.
-10. 🟡 **Hosting** — Cloudflare Pages, per DEPLOYMENT.md.
+1. 🔴 **Buy and connect `davaodigital.com`**, then verify it in Resend.
+2. 🔴 **Set `RESEND_API_KEY`** — the form is falling back to `mailto:` until you do.
+3. 🔴 **Replace or genuinely mark the reviews and case studies** (§2, items 1–5).
+   Do not advertise while invented proof is on the page.
+4. 🔴 **DPO + a lawyer pass on privacy and terms.**
+5. 🟡 **Connect the GitHub → Cloudflare build** so a push deploys itself.
+6. 🟡 **Create the Google Business Profile** and get GA4 live.
+7. 🟡 **Confirm the 7-day guarantee applies to every tier** (§1).

@@ -1,4 +1,4 @@
-import { ArrowUp, Facebook, Instagram, Linkedin, Mail, MapPin, MessageCircle, Navigation, Phone } from "lucide-react";
+import { ArrowUp, Facebook, Mail, MapPin, MessageCircle, Phone } from "lucide-react";
 import * as React from "react";
 
 import { DurianMark, EagleWingMark, MtApoHorizon, Wordmark } from "@/components/art/marks";
@@ -11,11 +11,15 @@ import { brand, footer, nav } from "@/data/site";
 import { useScrollTo } from "@/lib/smooth-scroll";
 import { anchorHref } from "@/lib/utils";
 
+/**
+ * Instagram and LinkedIn were removed — those accounts do not exist, and a dead
+ * link next to a working one makes the whole set look untended.
+ */
 const socials = [
   { label: "Facebook", href: brand.facebook, icon: Facebook },
-  { label: "Instagram", href: brand.instagram, icon: Instagram },
-  { label: "LinkedIn", href: brand.linkedin, icon: Linkedin },
   { label: "Messenger", href: brand.messenger, icon: MessageCircle },
+  { label: "Viber", href: brand.viber, icon: Phone },
+  { label: "Email", href: `mailto:${brand.email}`, icon: Mail },
 ];
 
 export function Footer() {
@@ -36,7 +40,7 @@ export function Footer() {
       <NoiseOverlay className="opacity-35" />
 
       <div className="relative mx-auto w-full max-w-[1240px] px-5 pb-10 pt-56 sm:px-8 sm:pt-64">
-        <div className="grid gap-12 lg:grid-cols-[1.4fr_1fr_1fr_1.1fr]">
+        <div className="grid gap-12 lg:grid-cols-[1.4fr_0.9fr_0.9fr_0.9fr_1.1fr]">
           <div>
             <a
               href={anchorHref("#top")}
@@ -90,13 +94,10 @@ export function Footer() {
               Studio
             </p>
             <ul className="mt-5 flex flex-col gap-3.5 text-[14.5px] text-[var(--text-muted)]">
+              {/* Online-only studio — no street address to publish. */}
               <li className="flex items-start gap-2.5">
                 <MapPin className="mt-0.5 size-4 shrink-0 text-leaf-brand/80" />
-                <span>
-                  {brand.city}
-                  <br />
-                  {brand.region}
-                </span>
+                <span>{brand.location}</span>
               </li>
               <li>
                 <a
@@ -118,13 +119,13 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href={brand.directionsUrl}
+                  href={brand.messenger}
                   target="_blank"
                   rel="noreferrer noopener"
                   className="flex items-center gap-2.5 transition-colors hover:text-[var(--text-secondary)]"
                 >
-                  <Navigation className="size-4 shrink-0 text-[var(--accent-2)]" />
-                  Get directions
+                  <MessageCircle className="size-4 shrink-0 text-[var(--accent-2)]" />
+                  Message us on Messenger
                 </a>
               </li>
             </ul>

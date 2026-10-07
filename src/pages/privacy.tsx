@@ -6,7 +6,7 @@ import { brand } from "@/data/site";
 import { Breadcrumbs, PageHeading, PageShell } from "@/pages/page-shell";
 
 /** PLACEHOLDER — set this to the date you publish the policy. */
-const LAST_UPDATED = "5 October 2026";
+const LAST_UPDATED = "7 October 2026";
 
 type Block = { heading: string; paras: string[]; list?: string[] };
 
@@ -42,15 +42,16 @@ const sections: Block[] = [
   {
     heading: "Form submissions",
     paras: [
-      "Our enquiry form opens your own email app with the details pre-filled, so your message reaches us directly from your inbox. We do not sell or rent your details to anyone, ever.",
-      "PLACEHOLDER: if you later connect a form service (Formspree, Netlify Forms, a CRM), name that provider here and link its privacy policy.",
+      "Our enquiry form sends your details to a small function running on Cloudflare, which emails the enquiry to our inbox and sends you a short confirmation. We also keep a copy of every enquiry in a private spreadsheet so nothing gets lost.",
+      "Cloudflare processes the message in transit, and our email and spreadsheet providers store the copy. We do not sell or rent your details to anyone, ever.",
     ],
   },
   {
     heading: "Cookies and analytics",
     paras: [
-      "PLACEHOLDER: describe the analytics and cookie tools you actually run. The site ships with a Google Analytics 4 snippet that stays dormant until a Measurement ID is added.",
-      "If you enable analytics, add a cookie banner and update this section to say which cookies are set and how a visitor can refuse them.",
+      "We ask before we set anything non-essential. The site ships with a Google Analytics 4 snippet that stays switched off until a Measurement ID is added, so no analytics cookies are set today.",
+      "When analytics is switched on it will be configured to anonymise your IP address, and the only thing it tells us is which pages are being read. There are no advertising or cross-site tracking cookies on this site, and nothing is sold to anyone.",
+      "You can dismiss the cookie notice and it will not appear again. Because the only cookie we ever set is an anonymous analytics one, blocking cookies in your browser or extensions has no effect on how the site works.",
     ],
   },
   {
@@ -69,8 +70,13 @@ const sections: Block[] = [
   {
     heading: "Third parties",
     paras: [
-      "We use a small number of trusted providers to run the site and our work — for example hosting, fonts and (if enabled) analytics. Each only receives the minimum data needed to do its job.",
-      "PLACEHOLDER: list the exact vendors you use, e.g. hosting provider, form provider, analytics provider.",
+      "We use a small number of trusted providers to run the site and our work. Each only receives the minimum data needed to do its job:",
+    ],
+    list: [
+      "Cloudflare — website hosting, DNS and the function that processes the enquiry form.",
+      "Resend — sends the email notification and your confirmation email.",
+      "Google — our inbox (Gmail) and, if you consent to analytics, Google Analytics.",
+      "Fontshare and Google Fonts — serve the typefaces the site is designed with.",
     ],
   },
   {

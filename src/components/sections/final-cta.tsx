@@ -1,4 +1,4 @@
-import { ArrowRight, Check, Mail, MapPin, MessageCircle, Navigation, Phone, Send, ShieldCheck } from "lucide-react";
+import { ArrowRight, Check, Clock, Mail, MapPin, MessageCircle, Phone, Send, ShieldCheck } from "lucide-react";
 import * as React from "react";
 
 import { GridField, MeshField } from "@/components/art/mesh";
@@ -16,23 +16,53 @@ const nextSteps = [
   "You review it. If you love it, we launch in 7 days.",
 ];
 
-export function FinalCta() {
-  const [sent, setSent] = React.useState(false);
+/** Where the form posts. Served by the Worker/Pages Function in /functions. */
+const ENQUIRY_ENDPOINT = "/api/enquiry";
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+export function FinalCta() {
+  /**
+   * `idle` → waiting · `sending` → POST in flight · `fallback` → the endpoint
+   * was unreachable, so we handed the lead to the visitor's mail app instead.
+   * A successful submit navigates to /thanks.html, so there is no "sent" state
+   * to render here.
+   */
+  const [status, setStatus] = React.useState<"idle" | "sending" | "fallback">("idle");
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    const name = String(data.get("name") ?? "");
-    const business = String(data.get("business") ?? "");
-    const reach = String(data.get("reach") ?? "");
-    const message = String(data.get("message") ?? "");
+    const payload = {
+      name: String(data.get("name") ?? "").trim(),
+      business: String(data.get("business") ?? "").trim(),
+      email: String(data.get("email") ?? "").trim(),
+      reach: String(data.get("reach") ?? "").trim(),
+      message: String(data.get("message") ?? "").trim(),
+      // Honeypot — hidden from humans, irresistible to bots.
+      company_website: String(data.get("company_website") ?? ""),
+    };
 
-    const subject = encodeURIComponent(`Free site preview — ${business || name}`);
-    const body = encodeURIComponent(
-      `Name: ${name}\nBusiness: ${business}\nFacebook page or phone: ${reach}\n\n${message}`,
-    );
-    window.location.href = `mailto:${brand.email}?subject=${subject}&body=${body}`;
-    setSent(true);
+    setStatus("sending");
+
+    try {
+      const response = await fetch(ENQUIRY_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!response.ok) throw new Error(`Enquiry endpoint returned ${response.status}`);
+      window.location.assign("/thanks.html");
+    } catch {
+      // The endpoint is not deployed yet, or the visitor is offline. Never lose
+      // the lead: fall back to their own mail app and tell them what happened.
+      const subject = encodeURIComponent(
+        `Free site preview — ${payload.business || payload.name}`,
+      );
+      const body = encodeURIComponent(
+        `Name: ${payload.name}\nBusiness: ${payload.business}\nEmail: ${payload.email}\nFacebook page or phone: ${payload.reach}\n\n${payload.message}`,
+      );
+      window.location.href = `mailto:${brand.email}?subject=${subject}&body=${body}`;
+      setStatus("fallback");
+    }
   };
 
   return (
@@ -72,20 +102,21 @@ export function FinalCta() {
                     Get your free site preview
                   </h3>
                   <p className="mt-2 text-[14.5px] text-[var(--text-muted)]">
-                    Four fields. That&apos;s all we need to start.
+                    Five quick fields. That&apos;s all we need to start.
                   </p>
 
-                  {sent ? (
+                  {status === "fallback" ? (
                     <div className="mt-8 rounded-3xl border border-teal-brand/25 bg-teal-brand/[0.07] p-6">
                       <span className="grid size-11 place-items-center rounded-full bg-ocean-brand">
                         <Check className="size-5 text-ink-950" />
                       </span>
                       <p className="mt-4 font-display text-[1.15rem] font-semibold text-white">
-                        Salamat! Your details are on the way.
+                        One more tap — send that email.
                       </p>
                       <p className="mt-2 text-[14.5px] leading-relaxed text-[var(--text-secondary)]">
-                        We&apos;ll reply within one business day. If your mail app didn&apos;t open,
-                        message us on Messenger or Viber and we&apos;ll pick it up from there.
+                        We opened your email app with everything filled in — just hit send. If it
+                        didn&apos;t open, message us on Messenger or Viber and we&apos;ll pick it up
+                        from there.
                       </p>
                       <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
                         <Button asChild size="default" className="sm:flex-1">
@@ -102,7 +133,7 @@ export function FinalCta() {
                       </div>
                     </div>
                   ) : (
-                    <form className="mt-8 flex flex-col gap-5" onSubmit={handleSubmit}>
+                    <form className="relative mt-8 flex flex-col gap-5" onSubmit={handleSubmit}>
                       <div className="grid gap-5 sm:grid-cols-2">
                         <div>
                           <Label htmlFor="name">Your name</Label>
@@ -114,12 +145,26 @@ export function FinalCta() {
                         </div>
                       </div>
                       <div>
+                        <Label htmlFor="email">Email address</Label>
+                        <Input
+                          id="email"
+                          name="email"
+                          type="email"
+                          required
+                          placeholder="you@yourbusiness.ph"
+                          autoComplete="email"
+                        />
+                        <p className="mt-2 text-[12px] text-[var(--text-muted)]">
+                          We send your confirmation here.
+                        </p>
+                      </div>
+                      <div>
                         <Label htmlFor="reach">Facebook page or phone number</Label>
                         <Input
                           id="reach"
                           name="reach"
                           required
-                          placeholder="facebook.com/yourpage or 0917 000 0000"
+                          placeholder="facebook.com/yourpage or 0917 123 4567"
                         />
                       </div>
                       <div>
@@ -130,9 +175,25 @@ export function FinalCta() {
                           placeholder="We need bookings, our prices listed, and to show up when people search for a dentist in Davao."
                         />
                       </div>
+                      {/* Honeypot — off-screen, never focusable, ignored by humans. */}
+                      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                        <label htmlFor="company_website">Company website</label>
+                        <input
+                          id="company_website"
+                          name="company_website"
+                          type="text"
+                          tabIndex={-1}
+                          autoComplete="off"
+                        />
+                      </div>
                       <Magnetic strength={0.14} className="mt-1">
-                        <Button type="submit" size="xl" className="group w-full sm:w-auto">
-                          Send my details
+                        <Button
+                          type="submit"
+                          size="xl"
+                          disabled={status === "sending"}
+                          className="group w-full disabled:opacity-70 sm:w-auto"
+                        >
+                          {status === "sending" ? "Sending…" : "Send my details"}
                           <Send className="transition-transform duration-300 group-hover:translate-x-1" />
                         </Button>
                       </Magnetic>
@@ -215,28 +276,29 @@ export function FinalCta() {
                 </ol>
               </Reveal>
 
-              {/* map + directions — PLACEHOLDER embed, swap brand.mapsEmbedUrl for the real pin */}
+              {/*
+                Where we work. The studio is online-only — no walk-in address and
+                no Google Business Profile yet — so there is deliberately no map
+                pin here. The map only goes back in once a real address exists.
+              */}
               <Reveal delay={0.28}>
-                <div className="hairline overflow-hidden rounded-4xl border border-[var(--border)] bg-[var(--tint-1)]">
-                  <iframe
-                    title={`Map — ${brand.name}, ${brand.city}`}
-                    src={brand.mapsEmbedUrl}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    className="h-44 w-full border-0 grayscale-[0.3]"
-                  />
-                  <div className="flex flex-wrap items-center justify-between gap-3 p-5">
-                    <p className="flex items-center gap-2.5 text-[13.5px] text-[var(--text-muted)]">
-                      <MapPin className="size-4 shrink-0 text-leaf-brand/80" />
-                      {brand.city} · {brand.region}
+                <div className="hairline rounded-4xl border border-[var(--border)] bg-[var(--tint-1)] p-7 backdrop-blur-xl">
+                  <p className="font-display text-[13px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+                    Where we work
+                  </p>
+                  <div className="mt-5 flex flex-col gap-3.5 text-[14px] text-[var(--text-secondary)]">
+                    <p className="flex items-start gap-2.5">
+                      <MapPin className="mt-0.5 size-4 shrink-0 text-leaf-brand/80" />
+                      {brand.location}
                     </p>
-                    <Button asChild variant="secondary" size="sm">
-                      <a href={brand.directionsUrl} target="_blank" rel="noreferrer noopener">
-                        <Navigation className="size-3.5" />
-                        Get directions
-                      </a>
-                    </Button>
+                    <p className="flex items-start gap-2.5">
+                      <Clock className="mt-0.5 size-4 shrink-0 text-teal-brand/80" />
+                      {brand.hours}
+                    </p>
                   </div>
+                  <p className="mt-5 text-[13.5px] leading-relaxed text-[var(--text-muted)]">
+                    {brand.meetingNote}
+                  </p>
                 </div>
               </Reveal>
             </div>

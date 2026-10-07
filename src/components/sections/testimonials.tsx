@@ -5,7 +5,7 @@ import { MeshField } from "@/components/art/mesh";
 import { Counter } from "@/components/fx/counter";
 import { InfiniteMovingCards } from "@/components/fx/infinite-moving-cards";
 import { Reveal, Section, SectionHeading } from "@/components/fx/reveal";
-import { testimonials } from "@/data/site";
+import { testimonials, testimonialsArePlaceholders } from "@/data/site";
 
 function QuoteCard({ quote, name, meta }: { quote: string; name: string; meta: string }) {
   return (
@@ -94,7 +94,9 @@ export function Testimonials() {
       </div>
 
       <Reveal className="relative z-10 mt-10 text-center text-[12.5px] text-[var(--text-muted)]">
-        Quotes shown are from current clients. Names shortened for privacy.
+        {testimonialsArePlaceholders
+          ? "Placeholder quotes — these are sample layouts until real client reviews are collected and approved."
+          : "Quotes shown are from current clients. Names shortened for privacy."}
       </Reveal>
     </Section>
   );

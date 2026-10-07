@@ -24,6 +24,7 @@ export default defineConfig({
         main: path.resolve(__dirname, "index.html"),
         thanks: path.resolve(__dirname, "thanks.html"),
         privacy: path.resolve(__dirname, "privacy.html"),
+        terms: path.resolve(__dirname, "terms.html"),
         "404": path.resolve(__dirname, "404.html"),
       },
       output: {

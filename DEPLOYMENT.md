@@ -1,247 +1,242 @@
-# Getting Davao Digital live on GitHub + Cloudflare Pages
+# Getting Davao Digital online
 
-This project is a **static site**. `bun run build` produces a plain `dist/` folder
-of HTML, CSS, JS and images — no server, no database, nothing to keep running.
-That makes hosting trivial and free.
+Everything is wired. This is the exact sequence to go from "code on GitHub" to
+"live on your own domain".
 
-Two parts: put the code on GitHub, then let Cloudflare build and serve it.
-
-Everything below assumes you are in the project folder:
-
-```bash
-cd "/c/Users/gabmig/Videos/Captures/Documents/gm-web-solutions"
-```
+Companion files: [MISSING-INFO.md](MISSING-INFO.md) (what is still fake or
+missing) and [FINAL-NOTES.md](FINAL-NOTES.md) (opinions and next steps).
 
 ---
 
-## Part 0 — Check it builds locally first
+## Where things stand today
 
-Never push code you have not built. Run:
-
-```bash
-bun install
-bun run typecheck     # TypeScript check, must be silent
-bun run build         # writes dist/
-bun run preview       # serves the built site to check it
-```
-
-If `bun run build` fails with `EPERM ... dist/og.png`, that is a Windows
-read-only-file quirk on this machine, not a code problem:
-
-```bash
-cmd //c "attrib -r dist\og.png"
-bun run build
-```
-
-That issue does **not** exist on Cloudflare's Linux builders.
-
----
-
-## Part 1 — GitHub
-
-### 1.1 Turn the folder into a repository
-
-```bash
-git init -b main
-git add .
-git commit -m "Davao Digital marketing site"
-```
-
-`.gitignore` is already set up, so `node_modules/`, `dist/`, screenshots and logs
-stay out of the repo. Verify what is about to be committed:
-
-```bash
-git status --short          # should be a clean tree after the commit
-git ls-files | wc -l        # count tracked files — should be source only
-```
-
-> ⚠️ The unrelated file `hd-rubber-backup-inlined.html` sits in the **parent**
-> `Documents` folder, not in this project, so it will not be committed. Leave it
-> out of the repository — it belongs to a different project.
-
-### 1.2 Create the repo on GitHub
-
-**Option A — in the browser**
-
-1. Go to <https://github.com/new>.
-2. Repository name: `davao-digital`. Private is fine.
-3. **Do not** tick "Add a README", "Add .gitignore" or "Choose a license" — you
-   already have those locally and the extra commit will conflict.
-4. Click **Create repository**, then run the two commands it shows you:
-
-```bash
-git remote add origin https://github.com/YOUR-USERNAME/davao-digital.git
-git push -u origin main
-```
-
-**Option B — with the GitHub CLI** (if you have `gh` installed)
-
-```bash
-gh repo create davao-digital --private --source=. --push
-```
-
-### 1.3 From now on
-
-```bash
-git add .
-git commit -m "what changed"
-git push
-```
-
-Every push to `main` automatically triggers a new Cloudflare deployment once
-Part 2 is done.
-
----
-
-## Part 2 — Cloudflare Pages
-
-Cloudflare Pages is free for this (unlimited static requests, unlimited
-bandwidth), gives you HTTPS automatically, a global CDN, and a preview URL for
-every branch. Its builders already include **Bun 1.2.15** and **Node 22**, so it
-can run this project's exact toolchain.
-
-### 2.1 Create the project
-
-1. Sign up / log in at <https://dash.cloudflare.com>.
-2. Left sidebar → **Workers & Pages** → **Create** → **Pages** tab →
-   **Connect to Git**.
-3. Authorise GitHub and pick the `davao-digital` repository.
-4. On the build-settings screen, enter exactly this:
-
-| Setting | Value |
+| Thing | State |
 |---|---|
-| Production branch | `main` |
-| Framework preset | **None** (or **Vite** — either works) |
-| Build command | `bun install && bun run build` |
-| Build output directory | `dist` |
-| Root directory | *(leave empty — the repo root **is** the project)* |
-| Environment variables | *(none required)* |
+| GitHub repo | `github.com/gabrielingente29-dot/davao-digital` (private), branch `main` |
+| Cloudflare account | `Gabrielingente29@gmail.com's Account` (`76b4fb425f263c9bcf6c49dfeb604f01`) |
+| Cloudflare project | **A Worker named `davao-digital`** — not a Pages project |
+| Live today | <https://davao-digital.gabrielingente29.workers.dev> ✅ serving the site |
+| `wrangler.jsonc` | In the repo — this is what makes the Worker serve `dist/` |
+| Custom domain | `davaodigital.com` — **not purchased yet** |
+| Auto-deploy on push | **Not connected yet** — see Part 1 |
 
-Notes:
-
-- You must type the build command yourself if the preset fills in `npm run build`
-  — this project uses Bun because that is what generated `bun.lock`. npm would
-  work too, but there is no `package-lock.json`, so installs would not be
-  reproducible.
-- **Do not set `NODE_ENV=production`.** If that variable is present, package
-  managers skip `devDependencies`, `typescript` never gets installed, and the
-  build dies with `tsc: not found`. See Troubleshooting.
-- Optional: add `BUN_VERSION` = `1.2.15` to pin the Bun version.
-
-5. **Save and Deploy.** The first build takes 1–2 minutes.
-
-### 2.2 Check the result
-
-You will get a URL like `https://davao-digital.pages.dev`. Check all four pages:
-
-- `/` — the landing page
-- `/privacy.html`
-- `/thanks.html`
-- `/404.html` and also a nonsense URL like `/nope` (must show the 404 design —
-  Cloudflare serves the root `404.html` automatically)
-
-Then open the browser console: there should be **zero** errors.
+Two earlier dashboard drag-and-drop uploads are what is live right now. They
+serve the site fine, but they do not rebuild when you push. Part 1 fixes that.
 
 ---
 
-## Part 3 — Point davaodigital.ph at it
+## Part 1 — Connect GitHub so pushes deploy themselves
 
-### If the domain is already on Cloudflare
+This is the last manual step, and it is done once.
 
-**Workers & Pages** → your project → **Custom domains** → **Set up a domain** →
-enter `davaodigital.ph`, repeat for `www.davaodigital.ph`. Cloudflare creates the
-DNS records and the SSL certificate itself.
+1. GitHub → the repo → make sure `main` is up to date (it is).
+2. Cloudflare dashboard → **Workers & Pages** → click the **`davao-digital`**
+   Worker → **Settings** → **Builds** (sometimes shown as **Build**).
+3. **Connect** the repository `gabrielingente29-dot/davao-digital`.
+4. Set these exactly:
 
-### If the domain is registered somewhere else
+   | Field | Value |
+   |---|---|
+   | Branch | `main` |
+   | Root directory | `/` |
+   | Build command | `bun install && bun run build` |
+   | Deploy command | `npx wrangler deploy` |
 
-1. In Cloudflare: **Add a site** → enter `davaodigital.ph` → choose the Free plan.
-2. Cloudflare gives you two nameservers.
-3. At your registrar (GoDaddy, Namecheap, etc.), replace the nameservers with
-   those two. Propagation is usually minutes, up to 24 hours.
-4. Then add the custom domains as above.
+5. **Save**. Cloudflare queues a build immediately — read the log.
 
-Keep the `*.pages.dev` URL — it stays useful as a staging link before you point
-the real domain over.
+### Why the old build was failing
 
-### Then swap the placeholder domain in the code
+Cloudflare always ran `bun install --frozen-lockfile`, whatever the build
+command said. The repo's `bun.lock` was written by a newer Bun than the builder
+runs (1.2.15), so the builder could not parse it, ignored it, and then refused to
+continue because "lockfile had changes, but lockfile is frozen".
 
-Everything shipped assumes `https://davaodigital.ph`. If the real domain differs,
-update it in exactly these places:
+**That lockfile is now deleted**, so there is nothing to be frozen against and
+the install succeeds. Two related traps, if it ever comes back:
 
-| File | What to change |
-|---|---|
-| `index.html` | canonical link, `og:url`, `og:image`, `twitter:image`, `@id`/`url` in JSON-LD |
-| `public/robots.txt` | the `Sitemap:` line |
-| `public/sitemap.xml` | both `<loc>` entries and `<lastmod>` |
-
-Then commit and push — Cloudflare redeploys automatically.
+- Do **not** add `NODE_ENV=production` as a build variable. Package managers then
+  skip `devDependencies`, `typescript` never installs, and the build dies with
+  `tsc: not found`.
+- You can pin Bun with a build variable `BUN_VERSION=1.3.0` if you want
+  reproducibility, but a locked-in version is what broke last time.
 
 ---
 
-## Part 4 — Post-deploy checklist
+## Part 2 — Give the enquiry form somewhere to send mail
 
-- [ ] All four pages load on the live domain over HTTPS
-- [ ] A nonsense URL shows the custom 404 page
-- [ ] Domain swapped in `index.html`, `robots.txt`, `sitemap.xml`
-- [ ] GA4 Measurement ID pasted in `index.html` (`var GA_ID = "G-XXXXXXXXXX"`)
-      — then add a cookie notice, which GA4 legally requires in the Philippines
-- [ ] Google Search Console: verify the domain, submit `sitemap.xml`
-- [ ] Google Business Profile: add the website URL
-- [ ] Test the enquiry form end to end (see "The form" below)
-- [ ] Send yourself the link and open it on a real phone
+The form POSTs to `/api/enquiry`, which is served by the small Worker entry in
+`worker/index.js` using the handler in `functions/api/enquiry.js`.
 
-### The form
+Until a Resend key is set, the endpoint answers `503` and the browser
+**automatically falls back** to opening the visitor's own mail app with the
+message pre-filled. So you are never worse off than before — but you do not get
+the emails or the spreadsheet until you do this.
 
-The enquiry form currently has **no backend** — it opens the visitor's own mail
-app. It works for some people and silently fails for anyone whose phone has no
-mail client configured, and you get no record of either case. Fix this before you
-spend money driving traffic to the page. Options, cheapest first:
+### 2.1 Resend (the email part) — required
 
-- **Cloudflare Pages Functions** — you are already on Cloudflare, so you can add
-  a `/functions/api/enquiry.js` endpoint that emails or forwards the lead. No
-  third party, no extra account.
-- **Web3Forms / Formspree** — swap the form `action` for their endpoint, 5-minute
-  setup, free tiers are plenty at this size.
+1. Sign up at <https://resend.com> (free: 3,000 emails/month) using
+   **davaodigital@gmail.com**, so the lead notifications arrive in the right inbox.
+2. **API Keys** → **Create API Key** → full access → copy it (starts with `re_`).
+3. Put it on the Worker as a secret:
 
-Whatever you choose, the form should end by sending the visitor to
-`/thanks.html` so the conversion is trackable.
+   ```bash
+   npx wrangler secret put RESEND_API_KEY
+   ```
+
+   (Or dashboard → the `davao-digital` Worker → **Settings** → **Variables and
+   Secrets** → add `RESEND_API_KEY` as an encrypted secret.)
+
+**Read this before you wonder where the visitor confirmations went.** Resend's
+shared test sender, `onboarding@resend.dev`, can only deliver to the Resend
+account owner's own address. So:
+
+- **Lead notifications to you → work immediately.** ✅
+- **Confirmation emails to visitors → switched off automatically** until
+  `davaodigital.com` is bought and verified inside Resend.
+
+Once the domain is verified, set one more variable and confirmations start
+sending on their own:
+
+```bash
+npx wrangler secret put RESEND_FROM
+# paste: Davao Digital <hello@davaodigital.com>
+```
+
+Optional extra: `LEAD_INBOX` if leads should go somewhere other than
+`davaodigital@gmail.com`.
+
+### 2.2 Google Sheet (the record-keeping part) — optional but recommended
+
+Leads are also appended to a Sheet, so you have a permanent list even if an
+email gets buried.
+
+1. Create a Google Sheet called **Davao Digital enquiries**. Add a tab named
+   `Enquiries`.
+2. **Extensions → Apps Script**, delete the placeholder, paste this:
+
+   ```javascript
+   var SECRET = "make-up-a-long-random-string";
+
+   function doPost(e) {
+     var body = JSON.parse(e.postData.contents);
+     if (SECRET && body.secret !== SECRET) {
+       return ContentService.createTextOutput("forbidden");
+     }
+     var ss = SpreadsheetApp.getActiveSpreadsheet();
+     var sheet = ss.getSheetByName("Enquiries") || ss.insertSheet("Enquiries");
+     if (sheet.getLastRow() === 0) {
+       sheet.appendRow(["Received", "Name", "Business", "Email", "Facebook / phone", "Message"]);
+     }
+     sheet.appendRow([
+       body.receivedAt, body.name, body.business, body.email, body.reach, body.message,
+     ]);
+     return ContentService.createTextOutput("ok");
+   }
+   ```
+
+3. **Deploy → New deployment → Web app.** Execute as **Me**. Who has access:
+   **Anyone**. Deploy, authorise it, and copy the `/exec` URL.
+4. Set it on the Worker:
+
+   ```bash
+   npx wrangler secret put SHEET_WEBHOOK_URL      # paste the /exec URL
+   npx wrangler secret put SHEET_WEBHOOK_SECRET   # paste the same SECRET string
+   ```
+
+If a Sheet write fails, the enquiry still reaches you by email — the Sheet is
+never allowed to break the form.
+
+### 2.3 Test it
+
+Open the live `#get-started` form, submit a real enquiry with your own email,
+and confirm all three: the email in `davaodigital@gmail.com`, a new Sheet row,
+and the redirect to `/thanks.html`.
+
+---
+
+## Part 3 — Point davaodigital.com at it
+
+The domain is **not purchased yet**. Everything in the code already points at
+`https://davaodigital.com` (canonical tags, Open Graph, JSON-LD, sitemap,
+robots), so once you buy it, there is no code change to make.
+
+1. Buy `davaodigital.com` (Cloudflare Registrar is the cheapest at cost, and it
+   is already the account you are deploying with).
+2. Cloudflare → **Workers & Pages** → `davao-digital` → **Settings** →
+   **Domains & Routes** → **Add** → **Custom domain** → `davaodigital.com`.
+3. Repeat for `www.davaodigital.com`.
+4. Cloudflare creates the DNS records and the TLS certificate itself.
+
+Until then, the `*.workers.dev` URL is a perfectly good staging link — but put
+`noindex` on it or keep it out of your marketing, because a search engine that
+finds both URLs sees duplicate content.
+
+### Then, in Resend
+
+**Domains → Add domain → `davaodigital.com`**, add the DKIM/SPF records it shows
+you to Cloudflare DNS, and wait for "Verified". That is what unlocks visitor
+confirmation emails and better inbox placement.
+
+---
+
+## Part 4 — Launch checklist
+
+- [ ] `bun run build` passes locally and Cloudflare's build goes green
+- [ ] All five pages load over HTTPS: `/`, `/privacy.html`, `/terms.html`,
+      `/thanks.html`, `/404.html`
+- [ ] A nonsense URL like `/nope` shows the branded 404 page
+- [ ] Enquiry form tested end to end (see 2.3)
+- [ ] `davaodigital.com` bought, connected, and verified in Resend
+- [ ] GA4 Measurement ID pasted into `index.html` (`var GA_ID = "G-XXXXXXXXXX"`)
+- [ ] Google Search Console: verify the domain, submit `/sitemap.xml`
+- [ ] Google Business Profile: create it, add the website URL
+- [ ] Real reviews and case studies replace the bracketed placeholders
+      (see MISSING-INFO.md §5) — do this **before** advertising
+- [ ] Privacy policy and terms read by a lawyer
+- [ ] Open the real domain on a real phone
 
 ---
 
 ## Troubleshooting
 
-**`tsc: not found` / `error TS: Cannot find module 'typescript'`**
-The builder skipped devDependencies, almost always because `NODE_ENV=production`
-is set as a build variable. Delete that variable
-(Settings → Environment variables) and redeploy. As a belt-and-braces fix you can
-change the build command to `bun install --frozen-lockfile && bun run build`.
+**The build fails on `bun install` / lockfile**
+A `bun.lock` was committed that the builder's Bun cannot parse. Delete it, commit,
+push. Do not "fix" it by pinning an older Bun.
 
-**Build succeeds but the site is unstyled / assets 404**
-The output directory is wrong. It must be `dist`, not `build` or `.`.
+**`tsc: not found`**
+`NODE_ENV=production` is set as a build variable, so devDependencies were skipped.
+Delete the variable.
 
-**`bun install` hangs or crashes**
-Pin the version: add `BUN_VERSION` = `1.2.15` as an environment variable and
-redeploy.
+**The build goes green but the site is unstyled, or `/api/enquiry` 404s**
+`wrangler.jsonc` is missing or its `assets.directory` is wrong. It must be
+`./dist`, and `main` must be `worker/index.js`.
+
+**The deploy command can't find `wrangler`**
+`npx wrangler deploy` is Cloudflare's own default and its build image ships
+wrangler. If it ever fails, add `wrangler` to `devDependencies` and change the
+deploy command to `bun x wrangler deploy`.
+
+**`POST /api/enquiry` returns 503**
+`RESEND_API_KEY` is not set on the Worker. See 2.1. The form is deliberately
+falling back to `mailto:` in the meantime, so no lead is lost.
+
+**`POST /api/enquiry` returns 502**
+The endpoint is configured but Resend rejected the send. Usually an invalid or
+deleted API key — check the Worker's live logs under **Observability**.
 
 **Nothing new appears after a push**
-Check the deployment list for a failed build, and confirm Cloudflare is watching
-the branch you pushed to (`main`).
-
-**Canonical tags still point at the wrong domain**
-They are hard-coded in `index.html` — no environment variable is used. See Part 3.
+The Git connection (Part 1) is not set up, or it is watching a different branch.
+Until it is, use a manual upload for urgent changes.
 
 ---
 
-## Alternative: deploy straight from your machine
-
-If you would rather not connect GitHub yet, you can upload the built folder
-directly with Wrangler (Bun can run it, no separate npm install):
+## Manual upload, if you need it right now
 
 ```bash
 bun run build
-bun x wrangler pages deploy dist --project-name=davao-digital
+npx wrangler deploy
 ```
 
-The first run opens a browser to log in to Cloudflare. This is handy for a
-one-off preview, but you lose automatic deploys on push, so use the Git
-connection for the real thing.
+That deploys to the existing `davao-digital` Worker using `wrangler.jsonc`. The
+first run opens a browser to log in to Cloudflare. It is a fine stop-gap, but
+the Git connection is what you actually want.

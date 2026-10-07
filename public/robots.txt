@@ -5,5 +5,7 @@ Allow: /
 Disallow: /thanks.html
 Disallow: /404.html
 
-# PLACEHOLDER: swap in the real domain once DNS is live.
-Sitemap: https://davaodigital.ph/sitemap.xml
+# The API endpoint is not a page.
+Disallow: /api/
+
+Sitemap: https://davaodigital.com/sitemap.xml

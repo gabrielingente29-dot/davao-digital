@@ -1,0 +1,29 @@
+{
+  // Deploys the existing Worker named "davao-digital" as: static files from
+  // dist/, plus the small Worker entry in worker/index.js for /api/enquiry.
+  //
+  // `name` must match the Worker that already exists in the Cloudflare account,
+  // or `npx wrangler deploy` would create a second, empty Worker instead of
+  // updating the live one.
+  "name": "davao-digital",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-10-06",
+
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+    // Serve dist/404.html for anything that does not match a file.
+    "not_found_handling": "404-page",
+    // "/privacy" and "/terms" resolve to privacy.html / terms.html.
+    "html_handling": "auto-trailing-slash"
+  },
+
+  "observability": {
+    "enabled": true
+  }
+
+  // Deliberately no `run_worker_first`: assets are matched first, so every real
+  // page is served straight from the edge and the Worker only wakes up for
+  // /api/*. Add `"run_worker_first": ["/api/*"]` here only if you later need the
+  // Worker to run before an asset of the same name.
+}

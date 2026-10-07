@@ -5,9 +5,13 @@ import { cn } from "@/lib/utils";
 /* ============================== LOGO ===================================== */
 
 /**
- * The brand mark: a slate magnifier ring with a white lens and a blue trend
+ * The brand mark: a slate magnifier ring with a light lens and a blue trend
  * arrow breaking out of the upper right. Drawn inline (no external file) so it
  * can never fail to load, and sized by the caller so it can never collapse.
+ *
+ * The lens and ring take their colours from `--logo-lens` / `--logo-ring`,
+ * which flip with the theme — otherwise a pure-white lens disappears into the
+ * white nav pill in light mode.
  */
 export function LogoMark({ className }: { className?: string }) {
   return (
@@ -20,7 +24,7 @@ export function LogoMark({ className }: { className?: string }) {
         {/* handle — slate near the ring, blue at the tip */}
         <path
           d="M37.6 35.6 L45 43"
-          stroke="#9BA4B5"
+          stroke="var(--logo-ring)"
           strokeWidth="8"
           strokeLinecap="butt"
         />
@@ -32,13 +36,13 @@ export function LogoMark({ className }: { className?: string }) {
         />
 
         {/* lens */}
-        <circle cx="27" cy="25" r="11.5" fill="#ffffff" />
+        <circle cx="27" cy="25" r="11.5" fill="var(--logo-lens)" />
 
         {/* ring, open where the arrow breaks through */}
         <path
           d="M41.57 19.7 A15.5 15.5 0 1 1 34.75 11.58"
           fill="none"
-          stroke="#9BA4B5"
+          stroke="var(--logo-ring)"
           strokeWidth="7.5"
           strokeLinecap="round"
         />

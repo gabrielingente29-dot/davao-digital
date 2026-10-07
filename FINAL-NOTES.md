@@ -6,71 +6,48 @@ version: my recommendations, and the decisions I cannot make for you.
 
 ---
 
-## 1. What changed in this pass
+## 1. What changed in the content-capture pass
 
-- **The header is fixed for good.** The nav pill is now 1480px wide instead of
-  1240px, and every item in it (wordmark, links, phone, buttons) is
-  `shrink-0` + `nowrap`. It can get wider, but it can never stack text into a
-  column again — which is what the six-line mess in your screenshots was.
-- **The logo renders properly.** It is an inline SVG drawn to match your artwork
-  (slate magnifier ring, white lens, blue trend arrow, blue handle tip), sized
-  `size-8`. It cannot show up as a broken-image icon any more.
-- **The nav is no longer see-through.** A big heading scrolling underneath the
-  pill used to show straight through the glass and tangle with the wordmark — very
-  visible on a phone. It now has a real backing surface (97% opaque + 24px blur).
-- **Placeholders fixed:** the JSON-LD schema still advertised the old
-  `hello@davaodigital.ph` / `+639170000000`, and the `<noscript>` text did too.
-  Both now use the real email and phone. The schema also still listed the old
-  Starter/Growth/Premium tiers at ₱5,000–10,000/month — it now matches the real
-  packages on the page.
-- **Facebook** is live in the footer and the schema: your numeric-ID page URL.
-- **Checklist and deploy docs** rewritten: `MISSING-INFO.md`, `DEPLOYMENT.md`.
-- `.gitignore` added so the repo only contains source.
+All ten sections of your content form are now in the code. Gone: Instagram and
+LinkedIn links, the fake map and "Get directions", every `davaodigital.ph`
+reference, the invented neighbourhood list (Bajada, Lanang, Matina, Torres,
+Bunawan), the "unlimited revisions" promise, the per-package delivery windows
+that contradicted the 7-day hero, `Dr. Reyes`, and the `0917 000 0000` form
+placeholder.
 
-Verified after the changes: `bun run typecheck` clean, `bun run build` clean, all
-four pages return 200, zero console errors, and no horizontal overflow at 390 /
-1024 / 1440px. Screenshots in `qa/shots/`.
+Added or rebuilt:
+
+- **A real form backend.** `/api/enquiry` emails the lead, logs it to a Google
+  Sheet, confirms to the visitor, and swallows bot spam via a honeypot. The form
+  gained an **email field** — a confirmation email is impossible without one.
+- **A Terms of Service page** at `/terms.html`, with package prices pulled from
+  the same data file as the pricing cards, so they cannot drift apart.
+- **A cookie notice** that remembers the visitor's choice.
+- **The light-mode logo fix.** The lens and ring are now theme-coloured tokens,
+  so the mark no longer disappears into a white nav pill.
+- **`wrangler.jsonc` + a Worker entry**, so the existing `davao-digital` Worker
+  serves `dist/` *and* the API from one `npx wrangler deploy`.
+- **`testimonialsArePlaceholders`** in `src/data/site.ts`. The reviews are still
+  invented, but they are now billed as placeholders in the UI instead of
+  masquerading as real customers — and it is one flag to flip once you have real
+  ones.
+
+**One decision I made for you:** you said the guarantee is "a website fully done
+in 7 days regardless of the tier", but also picked the option that scopes it to
+Basic. I went with your own words — every package now says "Live in 7 days".
+Confirm or flip it; details in MISSING-INFO.md §1.
+
+Verified after these changes: `bun run typecheck` clean, `bun run build` clean,
+all five pages return 200, zero console errors, no horizontal overflow at 390 or
+1440px, and the live Worker still serves the site.
 
 ---
 
-## 2. Decisions I need from you
+## 2. Decisions from the previous pass — now resolved
 
-Each one has my recommendation — you can just say "yes to all".
-
-**a) Delivery promise.** The hero says "online in 7 days" but Standard takes
-1–2 weeks and Premium 2–3 weeks.
-> **Recommend:** change the hero to **"Your business, online in as little as 5
-> days"** and put the exact delivery window on each package card (already there).
-> That keeps the speed promise punchy without over-promising to a Standard buyer.
-
-**b) Revision rounds.** Packages say 1 / 2 / 3 rounds; the process section says
-"unlimited revisions before launch".
-> **Recommend:** keep the rounds finite — it protects your time — and change the
-> process card to "Two rounds of changes until it looks right" (matching Standard,
-> your most popular tier).
-
-**c) Is the ₱3,000/month Care Plan optional or required?**
-The Care Plan banner says "available with every package", but the hero subhead
-says "we keep it fast, updated and growing for a flat monthly fee" and the price
-teaser says "/month Care Plan" — which reads like a mandatory subscription.
-> **Recommend:** if it is optional, change the hero line to "…then keep it fast and
-> updated if you want us to" so nobody feels ambushed by a recurring charge.
-
-**d) Reviews and case studies.** All eight testimonials and both case studies are
-invented, including "+38 online enquiries" and `[CLIENT 1]`.
-> **Recommend:** delete what you cannot evidence today. Three real reviews and one
-> real before/after beat eight invented ones — and nobody can complain about them.
-> Real ones can go in later; the sections already handle any number of entries.
-
-**e) Address and map.** Today the footer map points at Davao City as a whole.
-> **Recommend:** give me a street address or a Google Business Profile link (or
-> tell me you are online-only and I'll reword it to "serving clients online").
-> This is the single biggest lever for local search.
-
-**f) The "10+ businesses served" figure.** I lowered this from 40+ at your
-request — is 10 accurate? It appears in the hero trust row and the stats strip.
-> **Recommend:** keep it only if true; otherwise change to "Davao-owned studio".
-> Understatement is safer than a number a prospect can disprove.
+All six were answered in your content form. The outcomes are recorded in
+MISSING-INFO.md §1. The only one that needs your eyes is the 7-day delivery
+scope above.
 
 ---
 

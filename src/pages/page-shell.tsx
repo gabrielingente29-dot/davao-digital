@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { CookieNotice } from "@/components/fx/cookie-notice";
 import { CustomCursor } from "@/components/fx/custom-cursor";
 import { ScrollProgress } from "@/components/fx/scroll-progress";
 import { StickyMobileCta } from "@/components/fx/sticky-mobile-cta";
@@ -38,6 +39,7 @@ export function PageShell({ children }: { children: React.ReactNode }) {
       <main>{children}</main>
       <Footer />
       <StickyMobileCta />
+      <CookieNotice />
     </SmoothScrollProvider>
   );
 }

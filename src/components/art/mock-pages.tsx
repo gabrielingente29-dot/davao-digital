@@ -82,13 +82,15 @@ export function ClinicMock() {
             <div className="absolute -bottom-10 -left-6 size-56 rounded-full border-[22px] border-white/25" />
             <div className="absolute right-8 top-8 size-24 rounded-full bg-white/25 blur-[2px]" />
           </div>
+          {/* No named staff anywhere in the mockups — the studio presents as a
+              studio, not as a team of specific people. */}
           <div className="absolute right-6 top-[300px] w-[300px] rounded-2xl border border-[#e2e9f1] bg-white p-5 shadow-[0_30px_60px_-30px_rgba(20,40,80,0.45)]">
             <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8494a8]">
               Next available
             </p>
             <p className="mt-1.5 text-[19px] font-bold tracking-[-0.02em]">Tomorrow, 9:30 AM</p>
             <div className="mt-4 flex items-center justify-between rounded-xl bg-[#f2f6fb] px-3.5 py-2.5 text-[12px] font-semibold text-[#41526b]">
-              Dr. Reyes · Cleaning
+              Cleaning · 45 min
               <span className="text-[#22a7c4]">Confirm →</span>
             </div>
           </div>
