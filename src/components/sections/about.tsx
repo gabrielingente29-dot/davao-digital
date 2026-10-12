@@ -79,11 +79,20 @@ export function About() {
                   key={stat.label}
                   className="hairline rounded-3xl border border-[var(--border)] bg-[var(--tint-1)] p-5 backdrop-blur-xl"
                 >
-                  <dt className="text-[11.5px] font-semibold uppercase tracking-[0.16em] text-[var(--text-muted)]">
+                  <dt className="text-[11px] font-semibold uppercase tracking-[0.13em] text-[var(--text-muted)] [text-wrap:balance]">
                     {stat.label}
                   </dt>
-                  <dd className="tnum mt-2 font-display text-[1.6rem] font-semibold leading-none tracking-[-0.03em] text-[var(--text-primary)]">
-                    {stat.value}
+                  <dd className="tnum mt-2.5 font-display text-[clamp(1.35rem,5.5vw,1.65rem)] font-semibold leading-none tracking-[-0.03em] text-[var(--text-primary)]">
+                    {stat.value.includes("/") ? (
+                      <>
+                        {stat.value.split("/")[0]}
+                        <span className="text-[0.6em] font-medium tracking-normal text-[var(--text-muted)]">
+                          /{stat.value.split("/").slice(1).join("/")}
+                        </span>
+                      </>
+                    ) : (
+                      stat.value
+                    )}
                   </dd>
                 </div>
               ))}

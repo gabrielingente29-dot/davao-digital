@@ -11,7 +11,6 @@ export const brand = {
   phoneHref: "+639691933721",
   /** Messenger short link for the page ID above. */
   messenger: "https://m.me/61595369930225",
-  viber: "viber://chat?number=%2B639691933721",
   facebook: "https://www.facebook.com/profile.php?id=61595369930225",
   /**
    * The studio is ONLINE-ONLY: there is no walk-in address and no Google
@@ -20,7 +19,7 @@ export const brand = {
    */
   location: "Davao City, Philippines · working with clients online",
   meetingNote:
-    "Usually online — calls, Messenger or Viber. We're happy to meet in person in Davao City when it helps.",
+    "Usually online — calls, Messenger or email. We're happy to meet in person in Davao City when it helps.",
   hours: "Mon–Sat · 9AM–6PM (PHT)",
 } as const;
 
@@ -424,7 +423,7 @@ export const faqs = [
   },
   {
     q: "Do you build websites for businesses across Mindanao?",
-    a: "Yes. We're a Davao City studio and take on work anywhere in Mindanao — Davao del Sur, Davao del Norte, Tagum, General Santos, Cagayan de Oro, Butuan, Koronadal and further afield. Everything runs online through calls, Messenger or Viber, and you see a live preview before you pay anything.",
+    a: "Yes. We're a Davao City studio and take on work anywhere in Mindanao — Davao del Sur, Davao del Norte, Tagum, General Santos, Cagayan de Oro, Butuan, Koronadal and further afield. Everything runs online through calls, Messenger or email, and you see a live preview before you pay anything.",
   },
   {
     q: "Do you work with businesses outside Davao City?",
@@ -506,7 +505,7 @@ export const about = {
   body: [
     "We are deliberately small. The same person who designs your site builds it, launches it and answers the phone when you need a change — so nothing gets lost between a salesperson and a developer.",
     "We work with clinics, cafés and restaurants, hardware and supply shops, trades and contractors, workshops and manufacturers, and service businesses that need to be findable on Google and easy to contact. Most of our clients came to us with a Facebook page and no website at all.",
-    "We are an online-first studio: no walk-in office and no storefront. Work happens over calls, Messenger, Viber and email, which keeps our overheads — and your price — low. We are happy to meet in person in Davao City when a project needs it.",
+    "We are an online-first studio: no walk-in office and no storefront. Work happens over calls, Messenger and email, which keeps our overheads — and your price — low. We are happy to meet in person in Davao City when a project needs it.",
   ],
   stats: [
     { value: "7 days", label: "From first message to a live website" },

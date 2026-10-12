@@ -102,7 +102,7 @@ export function SectionHeading({
       <Reveal delay={0.06}>
         <h2
           className={cn(
-            "max-w-3xl font-display text-[clamp(2rem,4.4vw,3.4rem)] font-semibold leading-[1.02] tracking-[-0.035em] text-[var(--text-primary)]",
+            "max-w-3xl font-display text-[clamp(1.9rem,4vw,2.9rem)] font-semibold leading-[1.07] tracking-[-0.03em] text-[var(--text-primary)] [text-wrap:balance]",
             titleClassName,
           )}
         >

@@ -26,7 +26,7 @@ const sections: Block[] = [
     list: [
       "Details you type into our enquiry form — your name, business name, a Facebook page or phone number, and your message.",
       "Basic technical data (pages visited, approximate location by city, device type) if analytics is switched on.",
-      "Anything you send us directly by email, Messenger, Viber or phone.",
+      "Anything you send us directly by email, Messenger or phone.",
     ],
   },
   {

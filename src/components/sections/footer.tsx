@@ -18,7 +18,6 @@ import { anchorHref } from "@/lib/utils";
 const socials = [
   { label: "Facebook", href: brand.facebook, icon: Facebook },
   { label: "Messenger", href: brand.messenger, icon: MessageCircle },
-  { label: "Viber", href: brand.viber, icon: Phone },
   { label: "Email", href: `mailto:${brand.email}`, icon: Mail },
 ];
 

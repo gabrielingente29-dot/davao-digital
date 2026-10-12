@@ -115,7 +115,7 @@ export function FinalCta() {
                       </p>
                       <p className="mt-2 text-[14.5px] leading-relaxed text-[var(--text-secondary)]">
                         We opened your email app with everything filled in — just hit send. If it
-                        didn&apos;t open, message us on Messenger or Viber and we&apos;ll pick it up
+                        didn&apos;t open, message us on Messenger and we&apos;ll pick it up
                         from there.
                       </p>
                       <div className="mt-6 flex flex-col gap-2.5 sm:flex-row">
@@ -123,11 +123,6 @@ export function FinalCta() {
                           <a href={brand.messenger} target="_blank" rel="noreferrer noopener">
                             <MessageCircle className="size-4" />
                             Messenger
-                          </a>
-                        </Button>
-                        <Button asChild variant="secondary" size="default" className="sm:flex-1">
-                          <a href={brand.viber}>
-                            Viber
                           </a>
                         </Button>
                       </div>
@@ -220,17 +215,6 @@ export function FinalCta() {
                         <span className="flex items-center gap-2.5">
                           <MessageCircle className="size-4 text-teal-brand" />
                           Messenger
-                        </span>
-                        <ArrowRight className="size-4 opacity-50" />
-                      </a>
-                    </Button>
-                    <Button asChild variant="secondary" size="lg" block className="justify-between">
-                      <a href={brand.viber}>
-                        <span className="flex items-center gap-2.5">
-                          <span className="grid size-4 place-items-center rounded-full bg-ocean-brand/25 text-[9px] font-bold text-[var(--accent-1)]">
-                            V
-                          </span>
-                          Viber
                         </span>
                         <ArrowRight className="size-4 opacity-50" />
                       </a>
