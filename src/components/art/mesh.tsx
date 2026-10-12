@@ -67,5 +67,5 @@ export function GridField({
 
 /** Film-grain overlay. Keeps large flat areas from looking like flat CSS. */
 export function NoiseOverlay({ className }: { className?: string }) {
-  return <div aria-hidden="true" className={cn("noise absolute inset-0 z-[2]", className)} />;
+  return <div aria-hidden="true" className={cn("noise pointer-events-none absolute inset-0 z-[2]", className)} />;
 }
