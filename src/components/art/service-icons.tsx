@@ -18,7 +18,9 @@ function Frame({ children, className }: { children: React.ReactNode; className?:
       fill="none"
       aria-hidden="true"
       className={cn("size-11", className)}
-    />
+    >
+      {children}
+    </svg>
   );
 }
 
