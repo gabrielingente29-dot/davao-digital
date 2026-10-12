@@ -34,7 +34,7 @@ function CarePlanItem({ item }: { item: typeof CARE_PLAN_ITEMS[number] }) {
   );
 }
 
-function PriceLine({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
+function PriceLine({ tier, mode, popular }: { tier: Tier; mode: "build" | "year"; popular?: boolean }) {
   const isRange = false;
 
   // First-year totals, so the toggle shows a comparable number.
@@ -50,7 +50,7 @@ function PriceLine({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
     // than the viewport, and the range sits on its own line — so a long amount
     // can never outgrow the card the way `₱10,000–15,000` did on one line.
     <div className="@container">
-      <p className="text-[10.5px] font-semibold uppercase tracking-[0.18em] text-[var(--text-muted)]">
+      <p className={cn("text-[10.5px] font-semibold uppercase tracking-[0.18em]", popular ? "text-[var(--text-secondary)]" : "text-[var(--text-muted)]")}>
         {label}
       </p>
       <p className="tnum mt-2.5 font-display text-[clamp(2rem,13.5cqw,3rem)] font-semibold leading-none tracking-[-0.045em] text-[var(--text-primary)]">
@@ -58,7 +58,7 @@ function PriceLine({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
         {peso(from)}
         {isRange ? null : <span className="text-[var(--text-muted)]">+</span>}
       </p>
-      <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-muted)]">
+      <p className={cn("mt-3 text-[15px] leading-relaxed", popular ? "text-[var(--text-secondary)]" : "text-[var(--text-muted)]")}>
         {mode === "build" ? (
           <>
             then{" "}
@@ -116,13 +116,13 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
               <h3 className="font-display text-[1.5rem] font-semibold tracking-[-0.03em] text-[var(--text-primary)]">
                 {tier.name}
               </h3>
-              <p className="line-clamp-3 min-h-[4.875em] text-[14px] leading-relaxed text-[var(--text-muted)]">
+              <p className={cn("line-clamp-3 min-h-[4.875em] text-[14px] leading-relaxed", popular ? "text-[var(--text-secondary)]" : "text-[var(--text-muted)]")}>
                 {tier.tagline}
               </p>
             </div>
 
             <div className={cn("relative mt-7", popular && "popular-price")}>
-              <PriceLine tier={tier} mode={mode} />
+              <PriceLine tier={tier} mode={mode} popular={popular} />
             </div>
 
             <div className="relative my-7 h-px w-full bg-[linear-gradient(90deg,var(--border-strong),transparent)]" />
@@ -165,7 +165,7 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
                 block
                 size="lg"
                 variant={popular ? "primary" : "secondary"}
-                className={cn("group", popular && "shadow-[0_14px_44px_-16px_rgba(30,111,217,0.95)] hover:shadow-[0_18px_52px_-16px_rgba(30,111,217,1)] hover:translate-y-[-1px]")}
+                className={cn("group text-[15px] [&_svg]:size-4", popular && "shadow-[0_14px_44px_-16px_rgba(30,111,217,0.95)] hover:shadow-[0_18px_52px_-16px_rgba(30,111,217,1)] hover:translate-y-[-1px]")}
               >
                 <a href="#get-started">
                   {tier.cta}
