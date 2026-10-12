@@ -6,8 +6,8 @@ import { brand, policies, pricing } from "@/data/site";
 import { Breadcrumbs, PageHeading, PageShell } from "@/pages/page-shell";
 import { peso } from "@/lib/utils";
 
-/** PLACEHOLDER — set this to the date you publish the terms. */
-const LAST_UPDATED = "7 October 2026";
+/** Bump this date whenever the terms change. */
+const LAST_UPDATED = "11 October 2026";
 
 /** Prices come from src/data/site.ts so the terms can never drift from the page. */
 const PACKAGE_LINES = pricing.tiers.map((tier) => {
@@ -32,7 +32,6 @@ const sections: Block[] = [
     paras: [
       `These terms are between you (the client) and ${brand.name}, a web design studio based in ${brand.city}, ${brand.region}. They cover the website packages and the monthly Care Plan we sell through this website.`,
       `By asking us to start work you agree to these terms. If anything here is unclear, email ${brand.email} before you begin and we will explain it in plain language.`,
-      `PLACEHOLDER: review these terms with a lawyer before you rely on them commercially.`,
     ],
   },
   {
@@ -65,7 +64,7 @@ const sections: Block[] = [
   {
     heading: "Changes and revisions",
     paras: [
-      "Each package includes a set number of revision rounds before launch — 1 round on Basic, 2 on Standard and 3 on Premium. A round is one batch of changes sent to us at once.",
+      "Each package includes a set number of revision rounds before launch — 1 round on Basic, 2 on Professional and 3 on Premium. A round is one batch of changes sent to us at once.",
       "We do not start a new round until you have seen the previous one, so nothing gets lost. Changes requested after launch are handled under the Care Plan, which includes content edits every month.",
     ],
   },

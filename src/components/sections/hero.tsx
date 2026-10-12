@@ -32,14 +32,15 @@ const trustIcons = {
 } as const;
 
 /**
- * Placeholder business types for the trust row. Keep the industries, swap the
- * areas and names for real clients (with permission) when they exist.
+ * Business types the studio designs for. Deliberately labelled "Concept"
+ * rather than "client" — there are no published client names to claim yet.
+ * Swap in real names (with permission) once builds are live: TODO-BEFORE-PUBLISH.md, item 2.
  */
 const faces: TooltipPerson[] = [
-  { id: 1, name: "Dental clinic", role: "Davao City", gradient: "bg-teal-brand", initials: "DC" },
-  { id: 2, name: "Machine shop", role: "Davao City", gradient: "bg-ocean-brand", initials: "MS" },
-  { id: 3, name: "Cafe", role: "Davao City", gradient: "bg-leaf-brand", initials: "CF" },
-  { id: 4, name: "Real estate", role: "Davao City", gradient: "bg-ocean-soft", initials: "RE" },
+  { id: 1, name: "Manufacturing", role: "Concept", gradient: "bg-teal-brand", initials: "MF" },
+  { id: 2, name: "Cafés & food", role: "Concept", gradient: "bg-ocean-brand", initials: "CF" },
+  { id: 3, name: "Services & trades", role: "Concept", gradient: "bg-leaf-brand", initials: "ST" },
+  { id: 4, name: "Retail & supplies", role: "Concept", gradient: "bg-ocean-soft", initials: "RS" },
 ];
 
 export function Hero() {
@@ -97,12 +98,8 @@ export function Hero() {
               </Reveal>
 
               <h1 className="font-display text-[clamp(2.6rem,6.6vw,4.9rem)] font-semibold leading-[0.97] tracking-[-0.045em] text-[var(--text-primary)]">
-                <TextGenerateEffect
-                  text={`${hero.headlineLead} ${hero.headlineHighlight}.`}
-                  highlight={hero.headlineHighlight}
-                  stagger={0.07}
-                  delay={0.08}
-                />
+                Premium Website Design for{" "}
+                <span className="text-[var(--accent-1)]">Davao City</span> Businesses
               </h1>
 
               <Reveal delay={0.5} className="mt-7 max-w-[34rem]">
@@ -216,7 +213,8 @@ export function Hero() {
                 style={reduce ? undefined : { x: backX, y: backY }}
                 className="absolute -right-6 -top-10 z-0 hidden w-[58%] rotate-[3deg] md:block"
               >
-                <BrowserMockup url="mindanaometalworks.ph" compact ratio="aspect-[16/11]">
+                {/* Concept layout, not a client — the Work section labels it as such. */}
+                <BrowserMockup url="yourbusiness.ph" compact ratio="aspect-[16/11]">
                   <FitScale designWidth={1120} ratio={0.6875}>
                     <mockPages.workshop />
                   </FitScale>
@@ -230,10 +228,15 @@ export function Hero() {
                 data-cursor="view"
                 data-cursor-label="View"
               >
-                <BrowserMockup url="davaosmiledental.ph" className="ring-1 ring-white/[0.06]">
-                  <FitScale designWidth={1120} ratio={0.625}>
-                    <mockPages.clinic />
-                  </FitScale>
+                <BrowserMockup url="hdrubberdavao.com" className="ring-1 ring-white/[0.06]">
+                  {/* A real screenshot of the one live build — no invented client. */}
+                  <img
+                    src="/work/hd-rubber-home.jpg"
+                    alt="H.D. Rubber Manufacturer & Machine Shop — the live Davao City website we built"
+                    className="h-full w-full object-cover object-top"
+                    decoding="async"
+                    fetchPriority="high"
+                  />
                 </BrowserMockup>
 
                 <motion.div
@@ -247,7 +250,7 @@ export function Hero() {
                   </span>
                   <div className="leading-tight">
                     <p className="text-[12px] font-semibold text-[var(--text-primary)]">New enquiry</p>
-                    <p className="text-[10.5px] text-[var(--text-muted)]">Booked · 2 min ago</p>
+                    <p className="text-[10.5px] text-[var(--text-muted)]">Straight to your inbox</p>
                   </div>
                 </motion.div>
 
@@ -256,12 +259,12 @@ export function Hero() {
                   transition={{ duration: 9, repeat: Infinity, ease: "easeInOut", delay: 0.6 }}
                   className="hairline absolute -right-6 bottom-16 z-30 hidden items-center gap-2 rounded-2xl border-[var(--border-strong)] bg-[var(--surface-3)] px-3.5 py-2.5 shadow-[0_20px_50px_-25px_rgba(0,0,0,0.95)] backdrop-blur-md sm:flex"
                 >
-                  <span className="grid size-7 place-items-center rounded-full bg-ocean-brand text-[10px] font-bold text-white">
-                    ↑
+                  <span className="grid size-7 place-items-center rounded-full bg-ocean-brand text-[11px] font-bold text-white">
+                    ✓
                   </span>
                   <div className="leading-tight">
-                    <p className="text-[12px] font-semibold text-[var(--text-primary)]">1.4s load time</p>
-                    <p className="text-[10.5px] text-[var(--text-muted)]">Mobile score 98</p>
+                    <p className="text-[12px] font-semibold text-[var(--text-primary)]">Free preview first</p>
+                    <p className="text-[10.5px] text-[var(--text-muted)]">Built before you pay</p>
                   </div>
                 </motion.div>
               </motion.div>

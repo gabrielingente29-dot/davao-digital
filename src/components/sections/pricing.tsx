@@ -35,7 +35,7 @@ function CarePlanItem({ item }: { item: typeof CARE_PLAN_ITEMS[number] }) {
 }
 
 function PriceLine({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
-  const isRange = tier.build.from !== tier.build.to;
+  const isRange = false;
 
   // First-year totals, so the toggle shows a comparable number.
   const yearLow = tier.build.from + tier.monthly * 12;
@@ -58,11 +58,6 @@ function PriceLine({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
         {peso(from)}
         {isRange ? null : <span className="text-[var(--text-muted)]">+</span>}
       </p>
-      {isRange ? (
-        <p className="tnum mt-2 text-[15px] text-[var(--text-muted)]">
-          up to <span className="font-semibold text-[var(--text-secondary)]">₱{peso(to)}</span>
-        </p>
-      ) : null}
       <p className="mt-3 text-[15px] leading-relaxed text-[var(--text-muted)]">
         {mode === "build" ? (
           <>
@@ -92,10 +87,10 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
           <article
             data-cursor="hover"
             className={cn(
-              "relative flex h-full flex-col overflow-hidden rounded-4xl border p-7 backdrop-blur-xl transition-shadow duration-500 sm:p-8",
+              "relative flex h-full flex-col overflow-hidden rounded-4xl border p-7 backdrop-blur-xl transition-[transform,box-shadow,background-color,border-color] duration-500 sm:p-8",
               popular
-                ? "border-ocean-brand/45 bg-ocean-brand/[0.06] shadow-[0_50px_120px_-70px_rgba(30,111,217,0.9)]"
-                : "border-[var(--border)] bg-[var(--surface-raised)]/70 hover:shadow-[0_40px_100px_-70px_rgba(0,0,0,0.12)]",
+                ? "border-ocean-brand/70 bg-ocean-brand/[0.10] shadow-[0_55px_130px_-75px_rgba(30,111,217,0.55)] [&:hover_selected]:shadow-[0_65px_140px_-75px_rgba(30,111,217,0.7)]"
+                : "border-[var(--border)] bg-[var(--surface-raised)]/70 hover:shadow-[0_45px_110px_-75px_rgba(0,0,0,0.18)]",
             )}
           >
             {popular ? (
@@ -112,7 +107,7 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
               {/* fixed slot keeps the price rows aligned across all three cards */}
               <div className="flex h-6 items-center">
                 {popular ? (
-                  <Badge variant="accent" size="sm" className="uppercase tracking-[0.14em]">
+                  <Badge variant="accent" size="sm" className="uppercase tracking-[0.14em] shadow-[0_6px_18px_-8px_rgba(30,111,217,0.85)]">
                     <Star className="size-3" />
                     Most popular
                   </Badge>
@@ -126,7 +121,7 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
               </p>
             </div>
 
-            <div className="relative mt-7">
+            <div className={cn("relative mt-7", popular && "popular-price")}>
               <PriceLine tier={tier} mode={mode} />
             </div>
 
@@ -137,8 +132,8 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
                 <li key={item} className="flex items-start gap-3 text-[14.5px] text-[var(--text-secondary)]">
                   <span
                     className={cn(
-                      "mt-[3px] grid size-4 shrink-0 place-items-center rounded-full",
-                      popular ? "bg-ocean-brand" : "bg-[var(--tint-3)]",
+                      "mt-[3px] grid size-4 shrink-0 place-items-center rounded-full ring-1 ring-inset",
+                      popular ? "bg-ocean-brand ring-ocean-brand/30" : "bg-[var(--tint-3)] ring-[var(--border-strong)]",
                     )}
                   >
                     <Check className={cn("size-2.5", popular ? "text-ink-950" : "text-[var(--text-secondary)]")} />
@@ -170,7 +165,7 @@ function TierCard({ tier, mode }: { tier: Tier; mode: "build" | "year" }) {
                 block
                 size="lg"
                 variant={popular ? "primary" : "secondary"}
-                className="group"
+                className={cn("group", popular && "shadow-[0_14px_44px_-16px_rgba(30,111,217,0.95)] hover:shadow-[0_18px_52px_-16px_rgba(30,111,217,1)] hover:translate-y-[-1px]")}
               >
                 <a href="#get-started">
                   {tier.cta}

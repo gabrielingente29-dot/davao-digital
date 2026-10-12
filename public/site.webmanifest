@@ -1,0 +1,16 @@
+{
+  "name": "Davao Digital — Premium Web Design",
+  "short_name": "Davao Digital",
+  "description": "Web design in Davao City: websites for small businesses, live in 7 days from ₱10,000.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#081627",
+  "theme_color": "#081627",
+  "lang": "en-PH",
+  "icons": [
+    { "src": "/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

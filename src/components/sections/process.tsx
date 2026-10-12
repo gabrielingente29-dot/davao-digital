@@ -28,14 +28,14 @@ function StepScreen({ screen }: { screen: (typeof processSteps)[number]["screen"
         )}
       >
         <BrowserMockup
-          url={screen === "draft" ? "preview.davaodigital.com" : "davaosmiledental.ph"}
+          url={screen === "draft" ? "preview.davaodigital.com" : "yourbusiness.ph"}
           className={cn(
             "transition-shadow duration-700",
             screen === "live" && "!shadow-[0_50px_140px_-50px_rgba(30,111,217,0.85)]",
           )}
         >
           <FitScale designWidth={1120} ratio={0.625}>
-            <mockPages.clinic />
+            <mockPages.workshop />
           </FitScale>
         </BrowserMockup>
       </div>
@@ -105,7 +105,7 @@ function GrowthDashboard() {
         {bars.map((height, index) => (
           <motion.span
             key={index}
-            initial={reduce ? { height: `${height}%` } : { height: "6%" }}
+            initial={reduce || import.meta.env.SSR ? { height: `${height}%` } : { height: "6%" }}
             whileInView={{ height: `${height}%` }}
             viewport={{ once: true, amount: 0.6 }}
             transition={{ duration: 0.9, delay: index * 0.06, ease: [0.16, 1, 0.3, 1] }}
@@ -194,6 +194,7 @@ function StepRow({
 export function Process() {
   const [active, setActive] = React.useState(0);
   const onActive = React.useCallback((index: number) => setActive(index), []);
+  const reduce = usePrefersReducedMotion();
 
   return (
     <Section id="process" className="relative py-24 sm:py-28 lg:py-32">
@@ -230,7 +231,7 @@ export function Process() {
           <AnimatePresence mode="wait">
             <motion.div
               key={active}
-              initial={{ opacity: 0, y: 18, filter: "blur(10px)" }}
+              initial={reduce || import.meta.env.SSR ? { opacity: 1, y: 0, filter: "blur(0px)" } : { opacity: 0, y: 18, filter: "blur(10px)" }}
               animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
               exit={{ opacity: 0, y: -14, filter: "blur(10px)" }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}

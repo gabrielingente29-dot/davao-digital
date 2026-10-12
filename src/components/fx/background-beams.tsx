@@ -81,9 +81,9 @@ export function BackgroundBeams({
             stroke="url(#gm-beam-stroke)"
             strokeWidth={path.width}
             strokeLinecap="round"
-            initial={reduce ? { pathLength: 1, opacity: path.opacity * 0.5 } : { pathLength: 0, opacity: 0 }}
+            initial={reduce || import.meta.env.SSR ? { pathLength: 1, opacity: path.opacity * 0.5 } : { pathLength: 0, opacity: 0 }}
             animate={
-              reduce
+              reduce || import.meta.env.SSR
                 ? undefined
                 : {
                     pathLength: [0, 1, 1],

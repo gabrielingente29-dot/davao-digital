@@ -121,7 +121,7 @@ function MiniUptime() {
 }
 
 function MiniDesignStack() {
-  const layers: string[] = ["clinic", "cafe", "workshop"];
+  const layers: string[] = ["layout-1", "layout-2", "layout-3"];
   return (
     <div className="mt-7">
       <div className="relative h-[148px] sm:h-[168px]">

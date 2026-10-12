@@ -5,8 +5,8 @@ import { Reveal, Section } from "@/components/fx/reveal";
 import { brand } from "@/data/site";
 import { Breadcrumbs, PageHeading, PageShell } from "@/pages/page-shell";
 
-/** PLACEHOLDER — set this to the date you publish the policy. */
-const LAST_UPDATED = "7 October 2026";
+/** Bump this date whenever the policy changes. */
+const LAST_UPDATED = "11 October 2026";
 
 type Block = { heading: string; paras: string[]; list?: string[] };
 

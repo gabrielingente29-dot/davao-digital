@@ -16,10 +16,10 @@ function FacebookOnlyPanel() {
       <div className="relative grid h-full grid-cols-1 content-center gap-5 px-5 py-8 sm:grid-cols-[1.15fr_0.85fr] sm:px-12">          <div className="flex flex-col justify-center gap-4">
             <div className="flex items-center gap-3">
               <span className="grid size-12 shrink-0 place-items-center rounded-full bg-[var(--tint-2)] text-[15px] font-semibold text-[var(--text-muted)]">
-                DC
+                YB
               </span>
               <div>
-                <p className="text-[15px] font-semibold text-[var(--text-secondary)]">Davao Dental Care</p>
+                <p className="text-[15px] font-semibold text-[var(--text-secondary)]">Your business on Facebook</p>
                 <p className="flex items-center gap-1.5 text-[12px] text-[var(--text-muted)]">
                   <AlertTriangle className="size-3 shrink-0 text-leaf-brand/80" />
                   Page · not verified · last post 3 weeks ago
@@ -56,7 +56,7 @@ function FacebookOnlyPanel() {
 
           {/* what the page actually delivers */}          <div className="hidden flex-col justify-center gap-3 sm:flex">
             {[
-              { label: "Reach this month", value: "14 people" },
+              { label: "Posts seen by", value: "A few people" },
               { label: "New enquiries", value: "0" },
               { label: "Found on Google", value: "No" },
             ].map((row) => (
@@ -90,7 +90,7 @@ function WinningSitePanel() {
             D
           </span>
           <p className="truncate text-[11px] font-semibold text-[#0e1726] sm:text-[13.5px]">
-            davaosmiledental.ph
+            yourbusiness.ph
           </p>
           <span className="ml-auto flex shrink-0 items-center gap-1.5 rounded-full bg-emerald-500/12 px-2 py-1 text-[9.5px] font-semibold text-emerald-700 sm:px-2.5 sm:text-[11px]">
             <span className="size-1.5 rounded-full bg-emerald-500" />
@@ -100,14 +100,14 @@ function WinningSitePanel() {
         <div className="my-auto grid grid-cols-[1fr_0.62fr] items-center gap-4 pt-6 sm:gap-6">
           <div>
             <h3 className="font-display text-[clamp(0.95rem,2.6vw,2.3rem)] font-semibold leading-[1.04] tracking-[-0.035em] text-[#0e1726]">
-              Book your dental visit in two taps.
+              Your services, prices and hours — in two taps.
             </h3>
 
             <div className="mt-3 flex flex-wrap gap-1.5 sm:mt-5 sm:gap-2">
               {[
-                { icon: <Star className="size-3" />, label: "4.9 on Google" },
+                { icon: <Star className="size-3" />, label: "Shows on Google" },
                 { icon: <Check className="size-3" />, label: "Prices listed" },
-                { icon: <Check className="size-3" />, label: "Books 24/7" },
+                { icon: <Check className="size-3" />, label: "Enquiries 24/7" },
               ].map((chip) => (
                 <span
                   key={chip.label}
@@ -121,11 +121,11 @@ function WinningSitePanel() {
 
             <div className="mt-4 flex flex-wrap items-center gap-2 sm:mt-6 sm:gap-3">
               <span className="flex items-center gap-1.5 rounded-full bg-ocean-brand px-3 py-1.5 text-[10px] font-semibold text-white shadow-[0_14px_30px_-16px_rgba(30,111,217,0.9)] sm:gap-2 sm:px-5 sm:py-2.5 sm:text-[13px]">
-                Book appointment
+                Send an enquiry
                 <ArrowUpRight className="size-3" />
               </span>
               <span className="rounded-full border border-[#dbe6f0] bg-white px-3 py-1.5 text-[10px] font-semibold text-[#0e1726] sm:px-5 sm:py-2.5 sm:text-[13px]">
-                Call the clinic
+                Call you
               </span>
             </div>
           </div>
@@ -133,8 +133,8 @@ function WinningSitePanel() {
           <div className="flex flex-col gap-2 sm:gap-3">
             <div className="h-14 rounded-xl bg-ocean-brand shadow-[0_18px_40px_-26px_rgba(80,60,180,0.7)] sm:h-20 sm:rounded-2xl" />
             {[
-              { label: "New enquiries", value: "38" },
-              { label: "Found on Google", value: "#1 in Davao" },
+              { label: "Enquiries", value: "To your inbox" },
+              { label: "Found on Google", value: "Maps + Search" },
             ].map((row) => (
               <div
                 key={row.label}              className="rounded-2xl border border-[#dbe6f0] bg-white px-4 py-3"
@@ -180,7 +180,7 @@ export function ProblemSolution() {
           />
         </div>
         <p className="mt-4 text-center text-[12.5px] text-[var(--text-muted)]">
-          Drag the handle — this is the same business, six weeks apart.
+          Drag the handle — a Facebook-only presence next to a real website.
         </p>
       </Reveal>
 

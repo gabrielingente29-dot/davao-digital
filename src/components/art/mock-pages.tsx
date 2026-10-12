@@ -6,120 +6,6 @@ import * as React from "react";
  * Each page is drawn on a fixed 1120×700 canvas and scaled to fit.
  */
 
-/* --------------------------------- CLINIC -------------------------------- */
-
-export function ClinicMock() {
-  return (
-    <div className="relative h-[700px] w-[1120px] overflow-hidden bg-[#f7fafc] font-sans text-[#0e1726]">
-      {/* soft background bloom */}
-      <div className="absolute -left-24 -top-24 h-[520px] w-[520px] rounded-full bg-[radial-gradient(circle,#bfe9f7,transparent_65%)]" />
-      <div className="absolute -right-20 top-10 h-[420px] w-[420px] rounded-full bg-[radial-gradient(circle,#e3dcff,transparent_65%)]" />
-
-      {/* nav */}
-      <div className="relative flex items-center justify-between px-14 py-7">
-        <div className="flex items-center gap-3">
-          <div className="grid size-9 place-items-center rounded-xl bg-[#159fba] text-[15px] font-bold text-white">
-            D
-          </div>
-          <div className="leading-tight">
-            <p className="text-[17px] font-bold tracking-[-0.02em]">Davao Smile Dental</p>
-            <p className="text-[11px] font-medium text-[#5b6b7f]">Bajada · Davao City</p>
-          </div>
-        </div>
-        <div className="flex items-center gap-9 text-[13px] font-semibold text-[#41526b]">
-          <span>Services</span>
-          <span>Prices</span>
-          <span>Our clinic</span>
-          <span className="rounded-full bg-[#0e1726] px-5 py-2.5 text-[13px] font-semibold text-white">
-            Book appointment
-          </span>
-        </div>
-      </div>
-
-      {/* hero */}
-      <div className="relative grid grid-cols-[1.05fr_0.95fr] gap-10 px-14 pt-6">
-        <div className="pt-6">
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[#c9d8e6] bg-white px-3.5 py-1.5 text-[11px] font-semibold tracking-[0.08em] text-[#41526b]">
-            <span className="size-1.5 rounded-full bg-emerald-500" />
-            ACCEPTING NEW PATIENTS
-          </div>
-          <h1 className="max-w-[520px] font-display text-[52px] font-semibold leading-[1.02] tracking-[-0.035em]">
-            Gentle dental care in Davao City.
-          </h1>
-          <p className="mt-6 max-w-[430px] text-[15px] leading-relaxed text-[#4a5b73]">
-            Cleanings, braces and same-day repairs from a team that explains every step
-            before it happens. Walk-ins welcome, six days a week.
-          </p>
-          <div className="mt-8 flex items-center gap-4">
-            <span className="rounded-full bg-[#159fba] px-6 py-3 text-[14px] font-semibold text-white shadow-[0_14px_30px_-16px_rgba(21,159,186,0.9)]">
-              Book in two taps
-            </span>
-            <span className="rounded-full border border-[#c9d8e6] px-6 py-3 text-[14px] font-semibold text-[#0e1726]">
-              Call 0917 000 0000
-            </span>
-          </div>
-          <div className="mt-9 flex items-center gap-4">
-            <div className="flex -space-x-2.5">
-              {["#1E6FD9", "#17BEBB", "#4CAF50", "#0e1726"].map((c) => (
-                <span
-                  key={c}
-                  className="size-8 rounded-full border-2 border-white"
-                  style={{ background: c }}
-                />
-              ))}
-            </div>
-            <p className="text-[13px] font-semibold text-[#41526b]">
-              1,200+ patients treated
-              <span className="ml-2 font-normal text-[#7b8ba0]">★★★★★ 4.9 on Google</span>
-            </p>
-          </div>
-        </div>
-
-        {/* image + floating card */}
-        <div className="relative">
-          <div className="absolute right-0 top-2 h-[392px] w-[430px] overflow-hidden rounded-[28px] bg-[#1f9eb8] shadow-[0_40px_80px_-40px_rgba(20,40,80,0.55)]">
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-[radial-gradient(ellipse_at_bottom,#0b1626,transparent_70%)] opacity-45" />
-            <div className="absolute -bottom-10 -left-6 size-56 rounded-full border-[22px] border-white/25" />
-            <div className="absolute right-8 top-8 size-24 rounded-full bg-white/25 blur-[2px]" />
-          </div>
-          {/* No named staff anywhere in the mockups — the studio presents as a
-              studio, not as a team of specific people. */}
-          <div className="absolute right-6 top-[300px] w-[300px] rounded-2xl border border-[#e2e9f1] bg-white p-5 shadow-[0_30px_60px_-30px_rgba(20,40,80,0.45)]">
-            <p className="text-[11px] font-semibold uppercase tracking-[0.12em] text-[#8494a8]">
-              Next available
-            </p>
-            <p className="mt-1.5 text-[19px] font-bold tracking-[-0.02em]">Tomorrow, 9:30 AM</p>
-            <div className="mt-4 flex items-center justify-between rounded-xl bg-[#f2f6fb] px-3.5 py-2.5 text-[12px] font-semibold text-[#41526b]">
-              Cleaning · 45 min
-              <span className="text-[#22a7c4]">Confirm →</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* price cards */}
-      <div className="absolute inset-x-0 bottom-0 flex gap-4 px-14 pb-10">
-        {[
-          { label: "Cleaning & polishing", price: "₱1,200", note: "45 min" },
-          { label: "Braces consultation", price: "Free", note: "This month" },
-          { label: "Tooth whitening", price: "₱4,500", note: "Same day" },
-        ].map((item) => (
-          <div
-            key={item.label}
-            className="flex-1 rounded-2xl border border-[#e2e9f1] bg-white/90 px-5 py-4 backdrop-blur"
-          >
-            <p className="text-[12px] font-semibold text-[#41526b]">{item.label}</p>
-            <div className="mt-2 flex items-baseline justify-between">
-              <p className="text-[22px] font-bold tracking-[-0.03em]">{item.price}</p>
-              <p className="text-[11px] font-medium text-[#8494a8]">{item.note}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
-
 /* ---------------------------------- CAFE --------------------------------- */
 
 export function CafeMock() {
@@ -181,8 +67,8 @@ export function CafeMock() {
             <p className="text-[13px] font-semibold text-[#6d5748]">₱165 · large</p>
           </div>
           <div className="absolute -right-2 bottom-4 rounded-2xl border border-[#f0dfcd] bg-white px-4 py-3 shadow-[0_24px_50px_-28px_rgba(80,40,10,0.5)]">
-            <p className="text-[13px] font-bold">4.9 ★ · 612 reviews</p>
-            <p className="text-[11px] text-[#6d5748]">Google Maps</p>
+            <p className="text-[13px] font-bold">Open 7AM – 7PM</p>
+            <p className="text-[11px] text-[#6d5748]">Bolton Street</p>
           </div>
         </div>
       </div>
@@ -259,9 +145,9 @@ export function WorkshopMock() {
           </div>
           <div className="mt-10 flex gap-10">
             {[
-              ["18 yrs", "in business"],
-              ["240+", "projects shipped"],
-              ["±0.05mm", "tolerance"],
+              ["One shop", "rubber + metal"],
+              ["To spec", "from your drawing"],
+              ["Fast", "same-day quotes"],
             ].map(([value, label]) => (
               <div key={label}>
                 <p className="font-display text-[26px] font-semibold tracking-[-0.03em]">{value}</p>
@@ -343,7 +229,7 @@ export function MobileScreenMock() {
         </div>
         <div className="mt-6 flex items-center gap-2 rounded-2xl border border-[#f0dfcd] bg-white px-4 py-3">
           <span className="text-[16px] text-[#4CAF50]">★</span>
-          <p className="text-[12px] font-semibold">4.9 · 612 Google reviews</p>
+          <p className="text-[12px] font-semibold">Open 7AM – 7PM · Bolton St</p>
         </div>
       </div>
     </div>
@@ -351,7 +237,6 @@ export function MobileScreenMock() {
 }
 
 export const mockPages = {
-  clinic: ClinicMock,
   cafe: CafeMock,
   workshop: WorkshopMock,
 } as const;

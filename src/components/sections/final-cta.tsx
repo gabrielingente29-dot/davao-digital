@@ -141,7 +141,7 @@ export function FinalCta() {
                         </div>
                         <div>
                           <Label htmlFor="business">Business name</Label>
-                          <Input id="business" name="business" required placeholder="Davao Smile Dental" autoComplete="organization" />
+                          <Input id="business" name="business" required placeholder="Davao Builders Supply" autoComplete="organization" />
                         </div>
                       </div>
                       <div>
@@ -172,7 +172,7 @@ export function FinalCta() {
                         <Textarea
                           id="message"
                           name="message"
-                          placeholder="We need bookings, our prices listed, and to show up when people search for a dentist in Davao."
+                          placeholder="We need more enquiries, our prices listed, and to show up when people search for us in Davao."
                         />
                       </div>
                       {/* Honeypot — off-screen, never focusable, ignored by humans. */}

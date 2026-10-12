@@ -289,6 +289,19 @@
   }
 
   /* Numerals line up in pricing */
+  .popular-price .tnum {
+    color: var(--text-primary);
+  }
+
+  .popular-price p {
+    color: var(--text-secondary);
+  }
+
+  .popular-price p span {
+    color: var(--accent-1);
+  }
+
+  /* Numerals line up in pricing */
   .tnum {
     font-variant-numeric: tabular-nums;
     font-feature-settings: "tnum" 1;

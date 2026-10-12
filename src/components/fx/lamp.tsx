@@ -21,7 +21,7 @@ export function LampContainer({
 
   // Reduced motion: render the finished lamp immediately, no sweep.
   const grow = (delay: number, from: string, to: string, duration = 1.2) =>
-    reduce
+    reduce || import.meta.env.SSR
       ? { style: { width: to, opacity: 1 } }
       : {
           initial: { width: from, opacity: 0.4 },

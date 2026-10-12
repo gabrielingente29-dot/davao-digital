@@ -35,7 +35,7 @@ export function TextGenerateEffect({
     [highlight],
   );
 
-  if (reduce) {
+  if (reduce || import.meta.env.SSR) {
     return (
       <span className={className}>
         {words.map((word, i) => (

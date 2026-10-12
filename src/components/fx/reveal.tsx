@@ -24,7 +24,7 @@ export function Reveal({
   const reduce = usePrefersReducedMotion();
   const Comp = motion[as] as typeof motion.div;
 
-  if (reduce) return <div className={className}>{children}</div>;
+  if (reduce || import.meta.env.SSR) return <div className={className}>{children}</div>;
 
   return (
     <Comp

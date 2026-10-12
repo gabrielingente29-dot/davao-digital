@@ -25,12 +25,14 @@ export function Counter({
   const ref = React.useRef<HTMLSpanElement>(null);
   const inView = useInView(ref, { once: true, amount: 0.6 });
   const reduce = usePrefersReducedMotion();
-  const [value, setValue] = React.useState(from); // seed at `to` so the strip never shows 0 before the count begins
-  React.useEffect(() => { setValue(to); }, []);
+  // Seed at the final value so the server-rendered HTML (what crawlers and
+  // view-source see) always shows the real number, never 0. The count-up
+  // animation still runs from `from` when the element scrolls into view.
+  const [value, setValue] = React.useState(to);
 
   React.useEffect(() => {
     if (!inView) return;
-    if (reduce) {
+    if (reduce || import.meta.env.SSR) {
       setValue(to);
       return;
     }

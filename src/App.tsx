@@ -13,8 +13,8 @@ import { Navbar } from "@/components/sections/nav";
 import { Pricing } from "@/components/sections/pricing";
 import { ProblemSolution } from "@/components/sections/problem-solution";
 import { Process } from "@/components/sections/process";
+import { About } from "@/components/sections/about";
 import { Services } from "@/components/sections/services";
-import { Testimonials } from "@/components/sections/testimonials";
 import { usePrefersReducedMotion } from "@/lib/hooks";
 import { SmoothScrollProvider, useAnchorInterceptor } from "@/lib/smooth-scroll";
 
@@ -44,11 +44,11 @@ export function App() {
       <main>
         <Hero />
         <ProblemSolution />
+        <About />
         <Process />
         <Services />
         <Pricing />
         <CaseStudies />
-        <Testimonials />
         <Faq />
         <FinalCta />
       </main>

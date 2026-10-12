@@ -59,23 +59,23 @@ export type HeroTrustItem = {
 };
 
 export const hero = {
-  eyebrow: "Davao City · Web design & digital marketing",
+  eyebrow: "Davao City & Mindanao · Web design, SEO & digital marketing",
   headlineLead: "Your business, online in",
   headlineHighlight: "7 days",
   subhead:
-    "We build your website first — free. You review it, we launch it within a week, then we keep it fast, updated and growing for a flat monthly fee.",
+    "Web design for Davao City and Mindanao businesses. We build your website first — free. You review it, we launch it within a week, then we keep it fast, updated and growing for a flat monthly fee.",
   primaryCta: { label: "Get my free preview", href: "#get-started" },
   secondaryCta: { label: "See our work", href: "#work" },
   priceTeaser: {
     fromLabel: "From",
-    build: 15000,
+    build: 10000,
     buildNote: "one-time build",
     monthly: 3000,
     monthlyNote: "/month Care Plan",
     cta: { label: "See all packages", href: "#pricing" },
   },
   trust: [
-    { icon: "people", label: "Davao businesses served", value: 10, suffix: "+" },
+    { icon: "people", label: "Industries we design for", value: 6, suffix: "+" },
     { icon: "clock", prefix: "Live in ", value: 7, suffix: " days" },
     { icon: "shield", label: "No lock-in contracts" },
   ] satisfies HeroTrustItem[],
@@ -155,7 +155,7 @@ export const services: {
   {
     icon: "browser",
     title: "Website design",
-    body: "Custom sites built around how your customers actually buy. Fast, mobile-first and written to convert.",
+    body: "Custom web design for Davao City and Mindanao businesses, built around how your customers actually buy. Fast, mobile-first and written to convert.",
     span: "lg:col-span-4",
     featured: true,
   },
@@ -174,7 +174,7 @@ export const services: {
   {
     icon: "search",
     title: "Local SEO",
-    body: "Davao City and nationwide keywords, service pages and reviews that push you up the results.",
+    body: "SEO services for Davao City, Mindanao and nationwide keywords — service pages, structured data and reviews that push you up the results.",
     span: "lg:col-span-2",
   },
   {
@@ -205,7 +205,7 @@ export type Tier = {
 };
 
 export const pricing = {
-  eyebrow: "Pricing · Basic from ₱15,000",
+  eyebrow: "Pricing · Basic from ₱10,000",
   heading: "Clear prices. No surprise invoices.",
   body:
     "Every package includes design, build, hosting and management. You own your domain, always.",
@@ -216,7 +216,7 @@ export const pricing = {
       id: "basic",
       name: "Basic",
       tagline: "A professional online presence for small businesses and startups.",
-      build: { from: 15000, to: 18000 },
+      build: { from: 10000, to: 13000 },
       monthly: 3000,
       included: [
         "1–3 pages",
@@ -232,10 +232,10 @@ export const pricing = {
       cta: "Start with Basic",
     },
     {
-      id: "standard",
-      name: "Standard",
+      id: "professional",
+      name: "Professional",
       tagline: "A complete website built for growing businesses.",
-      build: { from: 20000, to: 25000 },
+      build: { from: 15000, to: 20000 },
       monthly: 3000,
       included: [
         "5–6 pages",
@@ -251,13 +251,13 @@ export const pricing = {
       ],
       adds: [],
       popular: true,
-      cta: "Choose Standard",
+      cta: "Choose Professional",
     },
     {
       id: "premium",
       name: "Premium",
       tagline: "A full-scale website for ambitious brands.",
-      build: { from: 30000, to: 30000 },
+      build: { from: 25000, to: 25000 },
       monthly: 3000,
       included: [
         "9–10 pages",
@@ -278,127 +278,122 @@ export const pricing = {
   reassurance: ["No lock-in.", "You own your domain.", "Free preview before you pay."],
 };
 
-export type CaseStudy = {
-  client: string;
+/* ------------------------------ PREVIOUS WORK ----------------------------- */
+
+export type WorkShot = { src: string; alt: string };
+
+export type FeaturedProject = {
+  name: string;
   industry: string;
   location: string;
+  url: string;
+  urlLabel: string;
   headline: string;
   summary: string;
-  quote: string;
-  quoteBy: string;
-  before: { src: string | null; caption: string };
-  after: { src: string | null; caption: string };
-  stats: { label: string; value: string }[];
-  accent: string;
-  mock: "clinic" | "cafe" | "workshop";
+  built: string[];
+  shots: WorkShot[];
+  /** A real, permissioned review from the client — shown beside the showcase. */
+  testimonial?: {
+    quote: string;
+    author: string;
+    role: string;
+    rating: number;
+  };
 };
 
-export const caseStudies: CaseStudy[] = [
-  {
-    client: "[CLIENT 1]",
-    industry: "Dental clinic",
-    location: "Davao City",
-    headline: "+38 online enquiries in the first month",
-    summary:
-      "We replaced an outdated Facebook-only presence with a clean booking site, then optimised their Google Business Profile for “dentist Davao”.",
+/**
+ * The one real build, live on its own domain. Every screenshot in
+ * /public/work was captured from the live site — nothing here is a mockup,
+ * a projection or an invented result. Add the next project above this one as
+ * real builds land (see TODO-BEFORE-PUBLISH.md, item 2).
+ */
+export const featuredProject: FeaturedProject = {
+  name: "H.D. Rubber Manufacturer & Machine Shop",
+  industry: "Rubber manufacturing & machine shop",
+  location: "Agdao, Davao City",
+  url: "https://hdrubberdavao.com",
+  urlLabel: "hdrubberdavao.com",
+  headline: "A 45-year-old Davao workshop, online and findable.",
+  summary:
+    "H.D. Rubber has been making custom rubber and machined parts on R. Castillo St since 1979. We built the site that explains what they make, who they serve and how to reach the workshop — with the local-search structure underneath it.",
+  built: [
+    "Six service sections: custom rubber parts, gaskets & seals, machining, industrial rollers, metal fabrication and OEM replacement parts",
+    "Search structure for buying terms — structured data, descriptive service headings and Davao City meta tags",
+    "Click-to-call, email and a Google Map to the Agdao workshop, so enquiries reach the shop phone",
+    "Mobile-first layout, built to stay quick on a phone connection",
+  ],
+  shots: [
+    {
+      src: "/work/hd-rubber-home.jpg",
+      alt: "H.D. Rubber homepage hero: “Davao City's Trusted Rubber Manufacturer & Machine Shop”, with Get a Quote and call buttons",
+    },
+    {
+      src: "/work/hd-rubber-services.jpg",
+      alt: "Services section listing custom rubber parts, gaskets and seals, machining, industrial rollers, metal fabrication and OEM replacement parts",
+    },
+    {
+      src: "/work/hd-rubber-why.jpg",
+      alt: "“Why Davao Businesses Trust H.D. Rubber” section with four trust cards",
+    },
+    {
+      src: "/work/hd-rubber-process.jpg",
+      alt: "“From Idea to Finished Part in Davao” three-step process section",
+    },
+  ],
+  testimonial: {
     quote:
-      "Patients now show up already knowing our services and prices. The front desk stopped repeating itself all day.",
-    quoteBy: "[CLIENT 1] — Clinic manager",
-    before: { src: null, caption: "Old page — no booking, no prices" },
-    after: { src: null, caption: "New site — book in two taps" },
-    stats: [
-      { label: "Enquiries / month", value: "38" },
-      { label: "Page load", value: "1.4s" },
-      { label: "Mobile traffic", value: "72%" },
-    ],
-    accent: "cyan",
-    mock: "clinic",
+      "Before Davao Digital, our business online was a Facebook page and no Google presence, doing nothing for us. Most of our business came from word of mouth. Within a couple of weeks of launching the new site, we were getting 25+ inquiries a month, up from 5 only. Customers now message or call us already knowing our services and ready to buy. The site looks professional, loads fast, and works great on phones. They also made the whole process easy and didn't charge big-agency prices. If you want a website that brings in business, not just one that looks nice, I'd recommend Davao Digital.",
+    author: "Jonathan D. Ingente",
+    role: "Owner, H.D. Rubber Manufacturer & Machine Shop · Davao City",
+    rating: 5,
   },
-  {
-    client: "[CLIENT 2]",
-    industry: "Machine shop & fabrication",
-    location: "Davao City",
-    headline: "3× more quote requests from Mindanao clients",
-    summary:
-      "A gallery-first site that shows the work, plus service pages for the jobs that pay best. Quote forms route straight to their shop phone.",
-    quote:
-      "Clients from Tagum and General Santos now call us first. The site does the talking for us.",
-    quoteBy: "[CLIENT 2] — Owner",
-    before: { src: null, caption: "Photos scattered on social media" },
-    after: { src: null, caption: "Organised, searchable project gallery" },
-    stats: [
-      { label: "Quote requests", value: "3×" },
-      { label: "Avg. job size", value: "+41%" },
-      { label: "Cities reached", value: "12" },
-    ],
-    accent: "violet",
-    mock: "workshop",
-  },
-];
+};
+
+/* ---------------------------- CONCEPT PREVIEWS ---------------------------- */
+
+export type ConceptPreview = {
+  id: string;
+  title: string;
+  audience: string;
+  blurb: string;
+  points: string[];
+  mock: "cafe" | "workshop";
+};
 
 /**
- * 🔴 PLACEHOLDER REVIEWS — NOT REAL YET.
+ * 🔵 ILLUSTRATIVE CONCEPTS — NOT CLIENT WORK.
  *
- * Every quote below is layout filler written by us. They are attributed to
- * bracketed placeholders on purpose, and the testimonials section reads
- * `testimonialsArePlaceholders` so the page says so out loud instead of
- * implying these are paying customers.
- *
- * To finish this properly: collect 6–8 real reviews (quote, first name,
- * business name, area, and written permission to publish), delete the brackets
- * from `name` and `meta`, then set `testimonialsArePlaceholders = false`.
- * Tracked in MISSING-INFO.md §5.
+ * Design studies drawn with the studio's own layout system, so a buyer can see
+ * the standard before paying anything. No real business, no results and no
+ * quotes are claimed anywhere on them. They exist so the "work" section is a
+ * "here is what yours would look like" page until real builds land.
  */
-export const testimonialsArePlaceholders = true;
-
-export const testimonials = [
+export const conceptPreviews: ConceptPreview[] = [
   {
-    quote:
-      "They sent us a finished website before we paid a single peso. We just said yes and it was live the following week.",
-    name: "[Client name — cafe owner]",
-    meta: "[Business] · Davao City",
+    id: "cafe",
+    title: "Café, restaurant or food business",
+    audience: "Single location · menu · walk-ins and orders",
+    blurb:
+      "The menu, prices and opening hours up front, with ordering and directions one tap away — the page a customer finds instead of scrolling your Facebook photos.",
+    points: [
+      "Menu and price list you can update in a minute",
+      "Tap-to-call, directions and order links",
+      "Google Map and opening hours, always current",
+    ],
+    mock: "cafe",
   },
   {
-    quote:
-      "Our Google profile finally works. We get calls from people searching for us in Davao and as far as General Santos.",
-    name: "[Client name — hardware supplier]",
-    meta: "[Business] · Davao City",
-  },
-  {
-    quote:
-      "The monthly report is the first marketing report I actually read. Short, clear, and it always comes with a next step.",
-    name: "[Client name — real estate broker]",
-    meta: "[Business] · Davao City",
-  },
-  {
-    quote:
-      "Bookings went up without us spending more on ads. The website just does the work now.",
-    name: "[Client name — salon owner]",
-    meta: "[Business] · Davao City",
-  },
-  {
-    quote:
-      "They replied the same day, every time. Updates are done before I even remember to ask.",
-    name: "[Client name — logistics company]",
-    meta: "[Business] · Tagum",
-  },
-  {
-    quote:
-      "We're in Cebu and Davao. One site, two location pages, and both rank. That solved a real headache for us.",
-    name: "[Client name — bakery & café group]",
-    meta: "[Business] · Cebu City",
-  },
-  {
-    quote:
-      "Our clinic looks like a chain now. Same staff, same building, completely different first impression.",
-    name: "[Client name — dental clinic owner]",
-    meta: "[Business] · Davao City",
-  },
-  {
-    quote:
-      "Facebook ads used to burn money. Now they point at a proper page and the numbers make sense.",
-    name: "[Client name — auto shop owner]",
-    meta: "[Business] · Cagayan de Oro",
+    id: "workshop",
+    title: "Manufacturing, fabrication or machine shop",
+    audience: "Multi-industry · quote led · B2B",
+    blurb:
+      "Built for buyers who arrive with a drawing and a deadline: capabilities, materials and industries served, with the quote request impossible to miss.",
+    points: [
+      "Capabilities and materials, written for engineers",
+      "Industries served and proof of work",
+      "Quote enquiries routed straight to your phone",
+    ],
+    mock: "workshop",
   },
 ];
 
@@ -425,17 +420,37 @@ export const faqs = [
   },
   {
     q: "How much does a website cost in Davao City?",
-    a: "Our packages run from ₱15,000 to ₱30,000+ depending on page count and features, plus an optional ₱3,000 per month Care Plan for hosting, updates, backups and support. We are not VAT-registered, so no VAT is added. That's deliberately in line with what local businesses can carry — no agency retainers.",
+    a: "Our packages run from ₱10,000 to ₱25,000+ depending on page count and features, plus an optional ₱3,000 per month Care Plan for hosting, updates, backups and support. We are not VAT-registered, so no VAT is added. That's deliberately in line with what local businesses in Davao City and Mindanao can carry — no agency retainers.",
+  },
+  {
+    q: "Do you build websites for businesses across Mindanao?",
+    a: "Yes. We're a Davao City studio and take on work anywhere in Mindanao — Davao del Sur, Davao del Norte, Tagum, General Santos, Cagayan de Oro, Butuan, Koronadal and further afield. Everything runs online through calls, Messenger or Viber, and you see a live preview before you pay anything.",
   },
   {
     q: "Do you work with businesses outside Davao City?",
-    a: "Yes. We're based in Davao City and work with clients across the Philippines — Tagum, General Santos, Cebu, Cagayan de Oro, Metro Manila and everywhere in between. Everything runs online, with calls in Bisaya, Tagalog or English. We're happy to meet in person in Davao City when it helps.",
+    a: "Yes. We're based in Davao City and work with clients across Mindanao and the rest of the Philippines — Tagum, General Santos, Cagayan de Oro, Butuan, Cebu, Metro Manila and everywhere in between. Everything runs online, with calls in Bisaya, Tagalog or English. We're happy to meet in person in Davao City when it helps.",
+  },
+  {
+    q: "How long does a website take to build?",
+    a: "Most projects go live within seven days of getting your logo, photos and prices. A simple one- to three-page Basic site can be finished in a couple of days; a nine- to ten-page Premium site with more content usually takes the full week. The clock starts when your materials arrive, not when you first message us.",
+  },
+  {
+    q: "Do you build websites for small businesses in Davao?",
+    a: "Yes — small and growing businesses are most of what we do: clinics, cafés, hardware and supply shops, trades, workshops and service businesses around Davao City. You do not need a big budget, a logo or existing photos; we work with what you have. The free preview means you see the website before you pay anything.",
+  },
+  {
+    q: "Do you provide hosting and the domain, or do I need my own?",
+    a: "We handle both, and both are included in the ₱3,000 per month Care Plan — managed hosting, SSL, daily backups and security updates. The domain is registered in your name, so it stays yours even if you stop working with us. If you already own a domain or hosting, we will set the site up on what you have.",
+  },
+  {
+    q: "Will my website show up on Google?",
+    a: "Every build ships with the technical groundwork: fast mobile-first pages, structured data, clean headings, a sitemap and a Google Search Console setup so Google can index you. We also set up and optimise your Google Business Profile so you appear in Maps and \"near me\" searches. Nobody can honestly promise a specific ranking — local results also depend on competition and reviews — but we build for it and tune it every month.",
   },
 ];
 
 export const footer = {
   blurb:
-    "A Davao City studio building fast, honest websites for businesses across the Philippines — then keeping them fast, secure and updated for a flat monthly fee. We work online, reply within a business day, and never lock you in.",
+    "A Davao City web design company building fast, honest websites for businesses across Mindanao and the Philippines — then keeping them fast, secure and updated for a flat monthly fee. We work online, reply within a business day, and never lock you in.",
   columns: [
     {
       title: "Services",
@@ -469,6 +484,8 @@ export const footer = {
   /** Confirmed service areas — kept to cities, not neighbourhoods. */
   areas: [
     "Davao City",
+    "Davao Region",
+    "Mindanao",
     "Tagum",
     "General Santos",
     "Cebu City",
@@ -477,3 +494,34 @@ export const footer = {
     "Nationwide Philippines",
   ],
 };
+
+/* -------------------------------------------------------------------------- */
+/* ABOUT — who we are, what we do, who we serve. Easy for AI to quote.         */
+/* -------------------------------------------------------------------------- */
+
+export const about = {
+  eyebrow: "About the studio",
+  heading: "A small Davao City web design studio, working online.",
+  lede: "Davao Digital is a web design company and digital marketing studio in Davao City, Philippines. As a small team of website designers and developers, we design, build, host and maintain websites for small and growing businesses across Davao, Mindanao and the rest of the country. Every project starts with a free preview: we build the first version of your website before you pay anything.",
+  body: [
+    "We are deliberately small. The same person who designs your site builds it, launches it and answers the phone when you need a change — so nothing gets lost between a salesperson and a developer.",
+    "We work with clinics, cafés and restaurants, hardware and supply shops, trades and contractors, workshops and manufacturers, and service businesses that need to be findable on Google and easy to contact. Most of our clients came to us with a Facebook page and no website at all.",
+    "We are an online-first studio: no walk-in office and no storefront. Work happens over calls, Messenger, Viber and email, which keeps our overheads — and your price — low. We are happy to meet in person in Davao City when a project needs it.",
+  ],
+  stats: [
+    { value: "7 days", label: "From first message to a live website" },
+    { value: "₱10,000", label: "Starting price, one-time build" },
+    { value: "₱3,000/mo", label: "Care Plan: hosting, updates, support" },
+    { value: "Free", label: "Preview built before you pay" },
+  ],
+  operatingSince: "",
+  differentiators: [
+    "We build your website first, free — you see it working before you pay.",
+    "You own your domain and your site files. No lock-in, cancel any month.",
+    "Fixed, published prices in pesos, not 'request a quote'.",
+    "Live in 7 days, on every package.",
+    "Local search is built in: Google Business Profile, structured data, sitemap.",
+  ],
+} as const;
+
+
